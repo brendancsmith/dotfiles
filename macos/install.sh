@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# System upgrades, wooh!
 echo "› sudo softwareupdate -i -a"
 sudo softwareupdate -i -a
 

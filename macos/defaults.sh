@@ -37,6 +37,9 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 # Restart automatically if the computer freezes
 # sudo systemsetup -setrestartfreeze on
 
+# Add the date to the status bar clock
+defaults write com.apple.menuextra.clock DateFormat -string "EEE MMM d  h:mm a"
+
 ###############################################################################
 # Trackpad, mouse, keyboard, Bluetooth accessories, and input                 #
 ###############################################################################
