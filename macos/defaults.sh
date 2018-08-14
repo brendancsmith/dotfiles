@@ -731,7 +731,6 @@ for app in "Activity Monitor" \
 	"Google Chrome" \
 	"Mail" \
 	"Messages" \
-	"Moom" \
 	"Opera" \
 	"Photos" \
 	"Safari" \
