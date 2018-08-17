@@ -715,8 +715,15 @@ defaults write de.bahoom.HyperDock window_snapping_delay_near -bool false
 # Magnet
 ###############################################################################
 
-# Reduce the 
+# Reduce the delay to display the bezel
 defaults write com.crowdcafe.windowmagnet bezelDisplayTime -float 0
+
+###############################################################################
+# Unclutter
+###############################################################################
+
+defaults write com.softwareambience.Unclutter LaunchAtStartup -bool true
+defaults write com.softwareambience.Unclutter HideMenubarIcon -bool true
 
 ###############################################################################
 # Kill affected applications                                                  
@@ -742,7 +749,8 @@ for app in "Activity Monitor" \
 	"Transmission" \
 	"Tweetbot" \
 	"Twitter" \
-	"iCal"; do
+	"iCal" \
+	"Unclutter"; do
 	killall "${app}" &> /dev/null
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

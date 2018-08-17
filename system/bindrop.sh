@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-cd "$(dirname $0)"/..
+cd "$(dirname $0)"/../bin
 
 # symlink executables to /usr/local/bin
-find bin -type f -perm -a=x | while read executable
+find . -type f -perm -a=x | while read executable
 do
     target="/usr/local/bin/$(basename $executable)"
-    ln -s "$executable" "$target" 2> /dev/null
-    if [ $? -eq 0 ]; then echo "Created link $target -> $executable"; fi
+    source="$(pwd)/${executable}"
+    ln -s "$source" "$target" 2> /dev/null
+    if [ $? -eq 0 ]; then echo "Created link $target -> $source"; fi
 done

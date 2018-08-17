@@ -36,6 +36,7 @@ cask 'daisydisk'
 cask 'dash'
 # cask 'deluge'
 cask 'docker'
+# cask dropbox
 # cask 'evernote'
 # cask 'fiddler'
 # cask 'filebot'
