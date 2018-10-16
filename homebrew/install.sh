@@ -16,4 +16,10 @@ then
 
 fi
 
-exit 0
+echo "Install bundle from Brewfile (y/N)? \c"
+read resp
+
+if [ "$resp" != "${resp#[Yy]}" ] ;then
+    dir="$(dirname $0)"
+    sh $dir/bundle.sh
+fi
