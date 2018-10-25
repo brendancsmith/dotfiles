@@ -3,7 +3,7 @@
 # Check for Homebrew
 if test ! $(which brew)
 then
-  echo "  Installing Homebrew for you."
+  echo "Installing Homebrew for you."
 
   # Install the correct homebrew for each OS type
   if test "$(uname)" = "Darwin"
@@ -16,10 +16,4 @@ then
 
 fi
 
-echo "Install bundle from Brewfile (y/N)? \c"
-read resp
-
-if [ "$resp" != "${resp#[Yy]}" ] ;then
-    dir="$(dirname $0)"
-    sh $dir/bundle.sh
-fi
+sh $dir/brew.sh
