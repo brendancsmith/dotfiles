@@ -7,6 +7,7 @@ cask 'aerial'
 cask 'alfred'
 cask 'bartender'
 # cask "contexts"
+# cask 'disk-inventory-x'
 # cask 'evernote'
 # cask 'firefox'
 cask 'google-chrome'

@@ -7,3 +7,7 @@ brew cask cleanup
 brew missing
 brew prune
 brew doctor
+brew cask audit
+brew cask doctor
+brew cask style --fix
+brew cask 

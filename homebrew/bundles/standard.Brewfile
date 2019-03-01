@@ -2,6 +2,7 @@ cask_args appdir: '/Applications'
 
 tap 'homebrew/bundle'
 
+brew 'p7zip'
 brew 'smartmontools'
 brew 'tldr'
 brew 'trash'
