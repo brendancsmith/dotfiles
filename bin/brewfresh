@@ -1,13 +1,11 @@
 #!/usr/bin/env sh
+
 brew update
 brew upgrade
 brew cleanup -s
-brew cask cleanup
+brew cask upgrade
+
 # now diagnostic
 brew missing
-brew prune
 brew doctor
-brew cask audit
 brew cask doctor
-brew cask style --fix
-brew cask 

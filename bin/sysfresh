@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+brewfresh
+
+# Mac App Store
+mas update
+
+# Npm
+npm upgrade -g

@@ -1,0 +1,22 @@
+#!/bin/sh
+
+SRC_DIR="${1}"
+DEST_DIR="${2}"
+USR_OPTS="${3}" | ""
+
+if [ -d "${SRC_DIR}" ] && [ "${SRC_DIR: -1}" != "/" ]; then
+    FOLDER=$(basename "${SRC_DIR}")
+    DEST_DIR="${DEST_DIR}/${FOLDER}"
+    mkdir -p "${DEST_DIR}"
+fi
+
+NUM_CPU=$(sysctl -n hw.ncpu)
+
+# -o "-ahP --info=progress2 --stats --log-file=\"${TMPDIR}/fpsync.log\""
+
+OPTS="--vv"
+if [ -n "${USR_OPTS}" ]; then
+    OPTS="${OPTS} + ${USR}"
+fi
+
+fpsync -n $NUM_CPU $OPTS "${SRC_DIR}" "${DEST_DIR}" | tee /dev/tty
