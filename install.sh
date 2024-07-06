@@ -64,6 +64,36 @@ sudo() {
   fi
 }
 
+# ---- operating system check ----
+
+if [ "$(uname)" = "Darwin" ]; then
+  log_task "Running on macOS"
+elif [ "$(uname)" = "Linux" ]; then
+  log_task "Running on Linux"
+  sudo apt update --yes
+else
+  error "Unsupported OS: $(uname)"
+fi
+
+# ---- set default shell to zsh ----
+
+install_zsh() {
+  if [ "$(uname)" = "Darwin" ]; then
+    if ! command -v zsh >/dev/null 2>&1; then
+      brew install zsh
+    fi
+  elif [ "$(uname)" = "Linux" ]; then
+    if ! command -v zsh >/dev/null 2>&1; then
+      sudo apt install zsh
+    fi
+  fi
+}
+
+if [ "$SHELL" != $(which zsh) ]; then
+  log_task "Setting default shell to zsh"
+  chsh -s $(which zsh)
+fi
+
 # ---- install homebrew ----
 
 install_homebrew() {
@@ -79,23 +109,11 @@ install_homebrew() {
 }
 export -f install_homebrew
 
-# ---- operating system check & git install ----
+# ---- install git ----
 
-if [ "$(uname)" = "Darwin" ]; then
-  log_task "Running on macOS"
-  if ! command -v git >/dev/null 2>&1; then
-    log_task "Installing git"
-    brew install git
-  fi
-elif [ "$(uname)" = "Linux" ]; then
-  log_task "Running on Linux"
-  sudo apt update --yes
-  if ! command -v git >/dev/null 2>&1; then
-    log_task "Installing git"
-    brew install git
-  fi
-else
-  error "Unsupported OS: $(uname)"
+if ! command -v git >/dev/null 2>&1; then
+  log_task "Installing git"
+  brew install git
 fi
 
 # ---- fetch dotfiles ----
