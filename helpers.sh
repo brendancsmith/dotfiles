@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-RED = "0;31"
-BLUE = "0;34"
+export RED="0;31"
+export BLUE="0;34"
 
 log_color() {
   color_code="$1"
@@ -9,23 +9,28 @@ log_color() {
 
   printf "\033[${color_code}m%s\033[0m\n" "$*" >&2
 }
+export -f log_color
 
 log_task() {
   log_color "$BLUE" "$@"
 }
+export -f log_task
 
 log_manual_action() {
   log_color "$RED" "⚠️" "$@"
 }
+export -f log_manual_action
 
 log_error() {
   log_color "$RED" "❌" "$@"
 }
+export -f log_error
 
 error() {
   log_error "$@"
   exit 1
 }
+export -f error
 
 sudo() {
   # shellcheck disable=SC2312
@@ -39,3 +44,4 @@ sudo() {
     command sudo "$@"
   fi
 }
+export -f sudo
