@@ -96,18 +96,15 @@ fi
 
 # ---- install homebrew ----
 
-install_homebrew() {
-  if ! command -v brew >/dev/null 2>&1; then
-    log_task "Installing Homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    (
-      echo
-      echo 'eval "$(/opt/homebrew/bin/brew shellenv)"'
-    ) >>$HOME/.zprofile
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-  fi
-}
-export -f install_homebrew
+if ! command -v brew >/dev/null 2>&1; then
+  log_task "Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  (
+    echo
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+  ) >>$HOME/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # ---- install git ----
 
