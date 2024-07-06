@@ -13,7 +13,7 @@ DOTFILES_BRANCH=${DOTFILES_BRANCH:-"main"}
 
 DOTFILES_REPO_HOST=${DOTFILES_REPO_HOST:-"https://github.com"}
 DOTFILES_REPO="${DOTFILES_REPO_HOST}/${DOTFILES_USER}/dotfiles"
-DOTFILES_DIR="${HOME}/.dotfiles"
+export DOTFILES_DIR="${HOME}/.dotfiles"
 
 # ---- colorized output ----
 
@@ -64,7 +64,38 @@ sudo() {
   fi
 }
 
-# ---- git helpers ----
+# ---- install homebrew ----
+
+if ! command -v brew >/dev/null 2>&1; then
+  log_task "Installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  (
+    echo
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"'
+  ) >>$HOME/.zprofile
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# ---- operating system check & git install ----
+
+if [ "$(uname)" = "Darwin" ]; then
+  log_task "Running on macOS"
+  if ! command -v git >/dev/null 2>&1; then
+    log_task "Installing git"
+    brew install git
+  fi
+elif [ "$(uname)" = "Linux" ]; then
+  log_task "Running on Linux"
+  sudo apt update --yes
+  if ! command -v git >/dev/null 2>&1; then
+    log_task "Installing git"
+    brew install git
+  fi
+else
+  error "Unsupported OS: $(uname)"
+fi
+
+# ---- fetch dotfiles ----
 
 git_refresh() {
   path=$(realpath "$1")
@@ -85,39 +116,6 @@ git_refresh() {
   ${git} clean -fdx
   unset path remote branch git
 }
-
-install_git_macos() {
-  if ! command -v brew >/dev/null 2>&1; then
-    log_task "Installing Homebrew"
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-  fi
-  log_task "Installing git"
-  brew install git
-}
-
-install_git_linux() {
-  log_task "Installing git"
-  sudo apt update --yes
-  sudo apt install --yes --no-install-recommends git
-}
-
-# ---- operating system check & git install ----
-
-if [ "$(uname)" = "Darwin" ]; then
-  log_task "Running on macOS"
-  if ! command -v git >/dev/null 2>&1; then
-    install_git_macos
-  fi
-elif [ "$(uname)" = "Linux" ]; then
-  log_task "Running on Linux"
-  if ! command -v git >/dev/null 2>&1; then
-    install_git_linux
-  fi
-else
-  error "Unsupported OS: $(uname)"
-fi
-
-# ---- fetch dotfiles ----
 
 if [ -d "${DOTFILES_DIR}" ]; then
   git_refresh "${DOTFILES_DIR}" "${DOTFILES_REPO}" "${DOTFILES_BRANCH}"

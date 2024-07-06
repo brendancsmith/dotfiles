@@ -17,4 +17,4 @@ fi
 
 # install core packages
 brew tap "homebrew/bundle"
-brew bundle --file="./core.Brewfile"
+brew bundle --file="${DOTFILES_DIR}/core.Brewfile"
