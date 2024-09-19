@@ -1,0 +1,236 @@
+#!/usr/bin/env zsh
+
+# ---- pyenv ----
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# ---- aider ----
+
+export AIDER_MODEL="gpt-4o"
+export AIDER_CODE_THEME="monokai"
+export AIDER_AUTO_COMMITS=False
+
+# ---- trunk ----
+
+test -f "$HOME/.cache/trunk/shell-hooks/zsh.rc" && source "$HOME/.cache/trunk/shell-hooks/zsh.rc"
+
+# ---- graphviz ----
+
+export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
+
+# ---- OpenBLAS ----
+
+export OPENBLAS="$(brew --prefix openblas)"
+
+# ---- thefuck ----
+
+# Experimental mode doesn't work in Warp
+## eval $(thefuck --alias --enable-experimental-instant-mode)
+eval $(thefuck --alias)
+
+# ---- 1Password Integration ----
+
+source /Users/brendan/.config/op/plugins.sh
+
+# ---- aliases
+
+alias stree='open -a SourceTree'
+alias warp='open -a Warp'
+
+alias ls='ls -alGh'  # show all, long format, color, human-readable
+alias tree="tree -C" # color
+
+
+alias pipi="pip install"
+alias pipu="pip install -U"
+alias pipr="pip install -r requirements.txt"
+alias pipru="pip install -U -r requirements.txt"
+alias pip-clear="pip freeze | xargs pip uninstall -y"
+
+alias pipc="pip-compile"
+alias pipcdev="pip-compile requirements.in && pip-compile dev-requirements.in"
+alias pips="pip-sync"
+alias pipsdev="pip-sync requirements.txt dev-requirements.txt"
+
+alias gpt-pilot="python $HOME/sandbox/gpt-pilot/pilot/main.py"
+
+alias root-commit="git commit --allow-empty -m 'Root commit'"
+
+alias listeners="lsof -i -P -n | grep LISTEN"
+
+alias compose="docker-compose"
+
+# ---- functions ----
+
+function cask-path() {
+    brew list --cask "$1" | tail -1 | cut -f1 -d' '
+}
+
+function unquarantine-single() {
+    xattr -d com.apple.quarantine "$1"
+}
+
+function unquarantine() {
+    for f in $@; do
+        xattr -dr com.apple.quarantine "$f" 2>/dev/null
+    done
+}
+
+function unquarantine-bundle() {
+    for i in $(cat $1); do
+        CASK_APP=$(echo "$i" | grep "^cask " | cut -f2 d' ' | cask-path $1)
+        echo "Allow"
+        unquarantine-app $CASK_APP
+    done
+}
+
+function mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+function ipy() {
+    jupyter console --kernel="pyenv_$(pyenv version-name)"
+}
+
+function pip-list {
+    pip freeze $@ | cut -f1 -d'='
+}
+
+function mkrepo {
+    if [ -z "$1" ]; then
+        echo "Usage: mkrepo <repo-path>"
+        return 1
+    fi
+
+    mkdir $1
+    cd $1
+    git init
+    git commit --allow-empty -m "Root commit"
+    git branch -M main
+}
+
+function mkvenv {
+    if [ -z "$1" ]; then
+        1="system"
+    fi
+
+    VENV_NAME="$(basename $PWD)"
+
+    pyenv virtualenv $1 "$VENV_NAME"
+    pyenv local "$VENV_NAME"
+
+    pip install --upgrade pip
+}
+
+pyenv-cleanup() {
+    # loop through all args
+    for version in "$@"; do
+        echo
+        echo "Cleaning pyenv version: ${version}"
+        pyenv shell "$version"
+        pip freeze >&1
+
+        # list packages and remove lines from `pip -e`
+        packages=$(pip freeze | grep -v "^-e ")
+
+        # now we extract the local package name & version from the next line
+        packages=$(
+            echo "$packages" | \
+            xargs -I % sh -c "echo % | cut -d'(' -f2 | cut -d')' -f1")
+
+        # uninstall all
+        echo "$packages" | xargs pip uninstall -y
+    done
+}
+
+# ---- completions ----
+
+# homebrew completions
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+
+autoload -Uz compinit && compinit
+
+# pipx completions
+if type pipx &>/dev/null; then
+    eval "$(register-python-argcomplete pipx)"
+fi
+
+# ---- Warp subshell support ----
+
+if [ -z "$WARP_BOOTSTRAPPED" ]; then
+    printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "zsh" }}\x9c'
+fi
+
+# ---- direnv ----
+
+eval "$(direnv hook zsh)"
+
+# ---- zplug ----
+
+export ZPLUG_HOME=/opt/homebrew/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
+# Specify zplug plugins
+zplug "plugins/brew", from:oh-my-zsh
+# zplug "plugins/docker",   from:oh-my-zsh
+# zplug "plugins/docker-compose",   from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+# zplug "plugins/github",   from:oh-my-zsh
+zplug "plugins/osx", from:oh-my-zsh
+
+# Install https://github.com/abertsch/Menlo-for-Powerline
+# iTerm2 > Profiles > Text > Use built-in Powerline glyphs
+zplug "themes/agnoster", from:oh-my-zsh
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo
+        zplug install
+    fi
+fi
+
+# Source zplug plugins and add commands to $PATH
+zplug load
+
+# ---- iTerm2 ----
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# ---- virtualenvwrapper ----
+
+export WORKON_HOME=$HOME/.venv
+source virtualenvwrapper.sh
+
+# shouldn't hard-code this
+export PATH="/Users/brendan/Library/Python/3.9/bin:$PATH"
+
+# ---- conda ----
+
+# >>> conda initialize >>>;q
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh" ]; then
+        # . "/opt/homebrew/Caskroom/miniforge/base/etc/profile.d/conda.sh"  # commented out by conda initialize
+    else
+        export PATH="/opt/homebrew/Caskroom/miniforge/base/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
+
+# ---- zsh-autosuggestions ----
+
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+
+fpath=(~/.zsh.d/ $fpath)
+
+# ---- ----
