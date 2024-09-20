@@ -30,17 +30,18 @@ alias commit="aicommits"
 alias compose="docker-compose"
 alias gpt-pilot="python $HOME/sandbox/gpt-pilot/pilot/main.py"
 
-{{- if .chezmoi.os | eq "darwin" -}}
+{{ if .chezmoi.os | eq "darwin" -}}
 # MacOS gnu tools
 alias ls='ls -alGh' # show all, list, colorize, human-readable
 alias tree='tree -C' # colorized output
 alias grep='grep --color=auto'
 
+# MacOS convenience aliases
 alias listeners="lsof -i -P -n | grep LISTEN"
 
 alias stree='open -a SourceTree'
 alias warp='open -a Warp'
-{{- end -}}
+{{- end }}
 
 # ---- functions ----
 
@@ -103,8 +104,9 @@ pyenv-cleanup() {
     done
 }
 
-{{- if .chezmoi.os | eq "darwin" -}}
+{{ if .chezmoi.os | eq "darwin" }}
 # MacOS functions
+
 function cask-path() {
     brew list --cask "$1" | tail -1 | cut -f1 -d' '
 }
@@ -126,14 +128,14 @@ function unquarantine-bundle() {
         unquarantine-app $CASK_APP
     done
 }
-{{- end -}}
+{{ end }}
 
-{{- if .chezmoi.os | eq "darwin" -}}
+{{ if .chezmoi.os | eq "darwin" -}}
 # ---- homebrew ----
 
 export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
 export OPENBLAS="$(brew --prefix openblas)"
-{{- end -}}
+{{- end }}
 
 # ---- pyenv ----
 
@@ -161,19 +163,20 @@ fi
 
 # ---- Shell Completions ----
 
-{{- if .chezmoi.os | eq "darwin" -}}
-# homebrew completions
-if type brew &>/dev/null; then
-    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
-{{- end -}}
-
 autoload -Uz compinit && compinit
 
 # pipx completions
 if type pipx &>/dev/null; then
     eval "$(register-python-argcomplete pipx)"
 fi
+
+{{ if .chezmoi.os | eq "darwin" }}
+# homebrew completions
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
+{{- end }}
+
 
 # ---- Warp subshell support ----
 
@@ -220,15 +223,15 @@ if [ -n "$(which virtualenvwrapper.sh)" ]; then
     export WORKON_HOME=$HOME/.venv
     source virtualenvwrapper.sh
 fi
+{{- if .chezmoi.os | eq "darwin" }}
 
-{{- if .chezmoi.os | eq "darwin" -}}
 # ---- iTerm2 ----
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # ---- conda ----
 
-# >>> conda initialize >>>;q
+# >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
@@ -242,7 +245,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-{{- end -}}
+{{- end }}
 
 # ---- zsh-autosuggestions ----
 
