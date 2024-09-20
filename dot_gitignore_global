@@ -1,0 +1,10 @@
+*~
+.DS_Store
+*.pyc
+.vscode
+mypy.ini
+.aider*
+nohup.out
+.python-version
+output
+.codiumai.toml
