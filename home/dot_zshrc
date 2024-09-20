@@ -7,7 +7,7 @@ eval "$(pyenv virtualenv-init -)"
 
 # ---- aider ----
 
-export AIDER_MODEL="gpt-4o"
+export AIDER_MODEL={{ .strongLLM | quote }}
 export AIDER_CODE_THEME="monokai"
 export AIDER_AUTO_COMMITS=False
 
@@ -40,7 +40,6 @@ alias warp='open -a Warp'
 
 alias ls='ls -alGh'  # show all, long format, color, human-readable
 alias tree="tree -C" # color
-
 
 alias pipi="pip install"
 alias pipu="pip install -U"

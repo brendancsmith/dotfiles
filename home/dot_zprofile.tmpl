@@ -28,6 +28,11 @@ eval $({{ $homebrew }} shellenv)
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
-# ---- secrets ----
+# ---- OpenAI ----
 
 export OPENAI_API_KEY=$(op read "op://Personal/OpenAI API Key/api key")
+
+# ---- LLM Settings
+
+export STRONG_LLM="{{ .strongLLM }}"
+export WEAK_LLM="{{ .weakLLM }}"
