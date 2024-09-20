@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ template "scripts-library" }}
+
+log_task "Installing pipx packages"
+
+while read -r package; do
+    pipx upgrade "$package" > /dev/null 2>&1 || true
+done < {{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}requirements.txt
