@@ -1,26 +1,7 @@
 source ~/.dotfiles/.zprofile
 
 
-{{- $paths := list -}}
 
-{{- $homeDir := .chezmoi.homeDir -}}
-{{- range $_, $relPath := list "bin" "go/bin" ".cargo/bin" ".local/bin" -}}
-{{-   $path := joinPath $homeDir $relPath -}}
-{{-   if stat $path -}}
-{{-     $paths = mustAppend $paths $path -}}
-{{-   end -}}
-{{- end -}}
-
-{{- if stat "/Applications/Postgres.app/Contents/Versions/latest/bin" -}}
-{{-   $paths = mustAppend $paths "/Applications/Postgres.app/Contents/Versions/latest/bin" -}}
-{{- end -}}
-
-{{- if stat "/Applications/Couchbase Server.app/Contents/Resources/couchbase-core/bin" -}}
-{{-   $paths = mustAppend $paths "/Applications/Couchbase Server.app/Contents/Resources/couchbase-core/bin" -}}
-{{- end -}}
-
-{{- $sep := (.chezmoi.pathListSeparator | quote) -}}
-{{ if $paths }}
 # ---- path ----
 
 # If you come from bash you might have to change your $PATH.
