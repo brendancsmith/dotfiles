@@ -1,18 +1,31 @@
 source ~/.dotfiles/.zprofile
 
+
+{{- $paths := list -}}
+
+{{- $homeDir := .chezmoi.homeDir -}}
+{{- range $_, $relPath := list "bin" "go/bin" ".cargo/bin" ".local/bin" -}}
+{{-   $path := joinPath $homeDir $relPath -}}
+{{-   if stat $path -}}
+{{-     $paths = mustAppend $paths $path -}}
+{{-   end -}}
+{{- end -}}
+
+{{- if stat "/Applications/Postgres.app/Contents/Versions/latest/bin" -}}
+{{-   $paths = mustAppend $paths "/Applications/Postgres.app/Contents/Versions/latest/bin" -}}
+{{- end -}}
+
+{{- if stat "/Applications/Couchbase Server.app/Contents/Resources/couchbase-core/bin" -}}
+{{-   $paths = mustAppend $paths "/Applications/Couchbase Server.app/Contents/Resources/couchbase-core/bin" -}}
+{{- end -}}
+
+{{- $sep := (.chezmoi.pathListSeparator | quote) -}}
+{{ if $paths }}
 # ---- path ----
 
-if [ -d "Applications/Postgres.app" ]; then
-  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
-fi
-
-if [ -d "/Appications/Couchbase Server.app" ]; then
-  export PATH="/Applications/Couchbase Server.app/Contents/Resources/couchbase-core/bin:$PATH"
-fi
-
-export PATH="/usr/local/sbin:$PATH"
-export PATH="$HOME/.local/bin:$PATH" # pipx
-export PATH="$HOME/bin:$PATH"
+# If you come from bash you might have to change your $PATH.
+export PATH={{- toStrings $paths | join $sep -}}:$PATH
+{{- end }}
 
 # ---- homebrew ----
 
