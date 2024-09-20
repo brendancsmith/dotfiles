@@ -61,6 +61,9 @@ alias listeners="lsof -i -P -n | grep LISTEN"
 
 alias compose="docker-compose"
 
+alias aic="aicommits"
+alias commit="aicommits"
+
 # ---- functions ----
 
 function cask-path() {
