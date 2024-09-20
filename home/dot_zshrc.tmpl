@@ -31,7 +31,10 @@ eval $(thefuck --alias)
 
 # ---- 1Password Integration ----
 
-source /Users/brendan/.config/op/plugins.sh
+source {{ .chezmoi.homeDir -}}
+{{- .chezmoi.pathSeparator -}}.config
+{{- .chezmoi.pathSeparator -}}op
+{{- .chezmoi.pathSeparator -}}plugins.sh
 
 # ---- aliases
 
