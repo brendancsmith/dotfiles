@@ -1,3 +1,5 @@
+# ---- OrbStack Generated ----
+
 Include ~{{ .chezmoi.pathSeparator }}.orbstack{{ .chezmoi.pathSeparator }}ssh{{ .chezmoi.pathSeparator }}config
 
 # --- Sourcetree Generated ---
@@ -11,10 +13,16 @@ Host {{ .gh_username }}-GitHub
 	AddKeysToAgent yes
 
 # ----------------------------
+
 Host *
 	ServerAliveInterval 60
 	ServerAliveCountMax 60
 
 # -------- 1Password ----------
+
 Host *
+{{- if eq .chezmoi.os "darwin" -}}
 	IdentityAgent "~{{ .chezmoi.pathSeparator }}Library{{ .chezmoi.pathSeparator }}Group Containers{{ .chezmoi.pathSeparator }}2BUA8C4S2C.com.1password{{ .chezmoi.pathSeparator }}t{{ .chezmoi.pathSeparator }}agent.sock"
+{{- else -}}
+	IdentityAgent "~{{ .chezmoi.pathSeparator }}.1password{{ .chezmoi.pathSeparator }}agent.sock"
+{{- end -}}
