@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -eufo pipefail
+
+{{ template "scripts-library" }}
+
+log_task "Installing global npm packages"
+
+declare -a packages=(
+  npm
+  mac-ca
+  aicommits
+  "@mermaid-js/mermaid-cli"
+)
+
+for package in "${packages[@]}"; do
+  npm install -g "$package" > /dev/null 2>&1 || true
+done

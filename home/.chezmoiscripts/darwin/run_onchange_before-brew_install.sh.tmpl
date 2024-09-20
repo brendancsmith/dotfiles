@@ -2,4 +2,8 @@
 
 set -eufo pipefail
 
-brew bundle --no-lock --file={{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}Brewfile
+{{ template "scripts-library" }}
+
+log_task "Installing Homebrew packages"
+
+brew bundle --no-lock --file={{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}Brewfile > /dev/null 2>&1 || true
