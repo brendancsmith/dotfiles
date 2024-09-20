@@ -1,0 +1,24 @@
+source ~/.dotfiles/.zprofile
+
+# ---- path ----
+
+if [ -d "Applications/Postgres.app" ]; then
+  export PATH="/Applications/Postgres.app/Contents/Versions/latest/bin:$PATH"
+fi
+
+if [ -d "/Appications/Couchbase Server.app" ]; then
+  export PATH="/Applications/Couchbase Server.app/Contents/Resources/couchbase-core/bin:$PATH"
+fi
+
+export PATH="/usr/local/sbin:$PATH"
+export PATH="$HOME/.local/bin:$PATH" # pipx
+export PATH="$HOME/bin:$PATH"
+
+# ---- orbstack ----
+
+# Added by OrbStack: command-line tools and integration
+source ~/.orbstack/shell/init.zsh 2>/dev/null || :
+
+# ---- secrets ----
+
+export OPENAI_API_KEY=$(op read "op://Personal/OpenAI API Key/api key")
