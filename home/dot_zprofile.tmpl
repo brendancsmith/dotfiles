@@ -14,6 +14,15 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="$HOME/.local/bin:$PATH" # pipx
 export PATH="$HOME/bin:$PATH"
 
+# ---- homebrew ----
+
+{{ $homebrew := "/opt/homebrew/bin/brew" }}
+{{- if stat $homebrew -}}
+fpath+=("{{ output $homebrew "--prefix" | trim }}/share/zsh/site-functions")
+
+eval $({{ $homebrew }} shellenv)
+{{- end }}
+
 # ---- orbstack ----
 
 # Added by OrbStack: command-line tools and integration
