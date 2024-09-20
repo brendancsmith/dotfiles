@@ -31,8 +31,3 @@ source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 # ---- OpenAI ----
 
 export OPENAI_API_KEY=$(op read "op://Personal/OpenAI API Key/api key")
-
-# ---- LLM Settings
-
-export STRONG_LLM="{{ .strongLLM }}"
-export WEAK_LLM="{{ .weakLLM }}"

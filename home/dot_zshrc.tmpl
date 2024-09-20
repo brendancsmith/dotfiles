@@ -7,7 +7,7 @@ eval "$(pyenv virtualenv-init -)"
 
 # ---- aider ----
 
-export AIDER_MODEL={{ .strongLLM | quote }}
+export AIDER_MODEL={{ .aiderModel | quote }}
 export AIDER_CODE_THEME="monokai"
 export AIDER_AUTO_COMMITS=False
 
