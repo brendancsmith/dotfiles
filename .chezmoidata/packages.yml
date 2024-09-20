@@ -1,205 +1,207 @@
 # formulae
-ack
-aria2
-asitop
-at-spi2-core
-awscli
-b2-tools
-bat
-bcftools
-blueutil
-bower
-ca-certificates
-cheat
-chezmoi
-cmake
-ctop
-curl
-dhcpdump
-dialog
-direnv
-dnstop
-doctl
-duti
-exiftool
-ffmpeg
-gcc
-gdk-pixbuf
-gh
-git
-git-lfs
-glances
-glfw
-glib
-gnutls
-go
-gptcommit
-graphviz
-gsettings-desktop-schemas
-gtk+3
-handbrake
-harfbuzz
-htop
-jq
-just
-libarchive
-libass
-libffi
-libmediainfo
-libomp
-librsvg
-libzen
-mac-cleanup-py
-mandown
-marked
-mas
-micro
-midnight-commander
-mods
-mongocli
-mongodb-community
-netpbm
-newt
-nextdns
-node
-noti
-ollama
-open-mpi
-openapi-generator
-openblas
-openldap
-p11-kit
-pandoc
-pango
-pinentry-mac
-pipx
-poetry
-poppler
-proctools
-psgrep
-pstree
-pv
-pyenv
-pyenv-virtualenv
-python-tk@3.9
-python@3.10
-python@3.11
-python@3.8
-python@3.9
-r
-redis
-rename
-rhash
-ripgrep-all
-rsync
-rustup
-smartmontools
-speedtest-cli
-sqlite
-src-cli
-srt
-ssh-copy-id
-sshfs-mac
-tcl-tk
-terminal-notifier
-tesseract
-thefuck
-tldr
-tmux
-trash
-tre-command
-tree
-unbound
-uv
-virtualenv
-virtualenvwrapper
-warp
-wget
-yarn
-youtube-dl
-zenity
-zeromq
-zplug
-zsh
-zsh-completions
-
-# casks
-1password
-1password-cli
-alt-tab
-appcleaner
-bartender
-blackhole-2ch
-chatgpt
-cheatsheet
-chromedriver
-chromium
-cocktail
-coconutbattery
-cryptomator
-cursor
-cyberduck
-dbeaver-community
-disk-expert
-dockmate
-dropbox
-firefox
-gephi
-gimp
-google-chrome
-google-drive
-gpg-suite
-handbrake
-hazel
-he3
-iina
-iterm2
-jdownloader
-keka
-maccleaner-pro
-maccy
-macforge
-macfuse
-macpilot
-macs-fan-control
-marked
-monero-wallet
-mongodb-compass
-monitorcontrol
-motrix
-netiquette
-orbstack
-pdf-reader-pro
-pieces-cli
-postgres-unofficial
-postman
-processmonitor
-quitter
-r
-raindropio
-raycast
-redis-stack-server
-rocket
-rstudio
-sequel-ace
-setapp
-sigmaos
-slack
-sourcetree
-spotify
-stats
-superhuman
-tabtopus
-taskexplorer
-thunderbird
-tor-browser
-transmission
-transmit
-trunk-io
-utm
-visual-studio-code
-vlc
-warp
-wireshark
-xld
-xquartz
+packages:
+  darwin:
+    brews:
+      - ack
+      - aria2
+      - asitop
+      - at-spi2-core
+      - awscli
+      - b2-tools
+      - bat
+      - bcftools
+      - blueutil
+      - bower
+      - ca-certificates
+      - cheat
+      - chezmoi
+      - cmake
+      - ctop
+      - curl
+      - dhcpdump
+      - dialog
+      - direnv
+      - dnstop
+      - doctl
+      - duti
+      - exiftool
+      - ffmpeg
+      - gcc
+      - gdk-pixbuf
+      - gh
+      - git
+      - git-lfs
+      - glances
+      - glfw
+      - glib
+      - gnutls
+      - go
+      - gptcommit
+      - graphviz
+      - gsettings-desktop-schemas
+      - gtk+3
+      - handbrake
+      - harfbuzz
+      - htop
+      - jq
+      - just
+      - libarchive
+      - libass
+      - libffi
+      - libmediainfo
+      - libomp
+      - librsvg
+      - libzen
+      - mac-cleanup-py
+      - mandown
+      - marked
+      - mas
+      - micro
+      - midnight-commander
+      - mods
+      - mongocli
+      - mongodb-community
+      - netpbm
+      - newt
+      - nextdns
+      - node
+      - noti
+      - ollama
+      - open-mpi
+      - openapi-generator
+      - openblas
+      - openldap
+      - p11-kit
+      - pandoc
+      - pango
+      - pinentry-mac
+      - pipx
+      - poetry
+      - poppler
+      - proctools
+      - psgrep
+      - pstree
+      - pv
+      - pyenv
+      - pyenv-virtualenv
+      - python-tk@3.9
+      - python@3.10
+      - python@3.11
+      - python@3.8
+      - python@3.9
+      - r
+      - redis
+      - rename
+      - rhash
+      - ripgrep-all
+      - rsync
+      - rustup
+      - smartmontools
+      - speedtest-cli
+      - sqlite
+      - src-cli
+      - srt
+      - ssh-copy-id
+      - sshfs-mac
+      - tcl-tk
+      - terminal-notifier
+      - tesseract
+      - thefuck
+      - tldr
+      - tmux
+      - trash
+      - tre-command
+      - tree
+      - unbound
+      - uv
+      - virtualenv
+      - virtualenvwrapper
+      - warp
+      - wget
+      - yarn
+      - youtube-dl
+      - zenity
+      - zeromq
+      - zplug
+      - zsh
+      - zsh-completions
+    casks:
+      - 1password
+      - 1password-cli
+      - alt-tab
+      - appcleaner
+      - bartender
+      - blackhole-2ch
+      - chatgpt
+      - cheatsheet
+      - chromedriver
+      - chromium
+      - cocktail
+      - coconutbattery
+      - cryptomator
+      - cursor
+      - cyberduck
+      - dbeaver-community
+      - disk-expert
+      - dockmate
+      - dropbox
+      - firefox
+      - gephi
+      - gimp
+      - google-chrome
+      - google-drive
+      - gpg-suite
+      - handbrake
+      - hazel
+      - he3
+      - iina
+      - iterm2
+      - jdownloader
+      - keka
+      - maccleaner-pro
+      - maccy
+      - macforge
+      - macfuse
+      - macpilot
+      - macs-fan-control
+      - marked
+      - monero-wallet
+      - mongodb-compass
+      - monitorcontrol
+      - motrix
+      - netiquette
+      - orbstack
+      - pdf-reader-pro
+      - pieces-cli
+      - postgres-unofficial
+      - postman
+      - processmonitor
+      - quitter
+      - r
+      - raindropio
+      - raycast
+      - redis-stack-server
+      - rocket
+      - rstudio
+      - sequel-ace
+      - setapp
+      - sigmaos
+      - slack
+      - sourcetree
+      - spotify
+      - stats
+      - superhuman
+      - tabtopus
+      - taskexplorer
+      - thunderbird
+      - tor-browser
+      - transmission
+      - transmit
+      - trunk-io
+      - utm
+      - visual-studio-code
+      - vlc
+      - warp
+      - wireshark
+      - xld
+      - xquartz
