@@ -24,6 +24,22 @@ brew install chezmoi
 chezmoi init --apply <your-repo-url>
 ```
 
+4. Integrate with 1Password
+
+Open the 1Password app and log in. Adjust the following settings:
+
+In Settings > Developer:
+- Use the SSH Agent: ON
+- Integrate with 1Password CLI: ON
+
+*Optional - Enable other Developer settings, Labs, etc.*
+
+Sign-in to the CLI:
+
+```bash
+eval $(op signin)
+```
+
 ## Usage
 
 To update your dotfiles, make changes in the source directory and then apply them:
@@ -32,7 +48,7 @@ To update your dotfiles, make changes in the source directory and then apply the
 chezmoi apply
 ```
 
-To update your dotfiles from the source repository:
+Or, to update your dotfiles from the source repository:
 
 ```bash
 chezmoi update -v
