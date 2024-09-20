@@ -1,0 +1,19 @@
+Include ~{{ .chezmoi.pathSeparator }}.orbstack{{ .chezmoi.pathSeparator }}ssh{{ .chezmoi.pathSeparator }}config
+
+# --- Sourcetree Generated ---
+Host brendancsmith-GitHub
+	User brendancsmith
+	HostName github.com
+	IdentityFile {{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.ssh{{ .chezmoi.pathSeparator }}brendancsmith-GitHub
+	PreferredAuthentications publickey
+	UseKeychain yes
+	AddKeysToAgent yes
+
+# ----------------------------
+Host *
+	ServerAliveInterval 60
+	ServerAliveCountMax 60
+
+# -------- 1Password ----------
+Host *
+	IdentityAgent "~{{ .chezmoi.pathSeparator }}Library{{ .chezmoi.pathSeparator }}Group Containers{{ .chezmoi.pathSeparator }}2BUA8C4S2C.com.1password{{ .chezmoi.pathSeparator }}t{{ .chezmoi.pathSeparator }}agent.sock"
