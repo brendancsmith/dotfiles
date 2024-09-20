@@ -1,1 +1,1 @@
-{{ onepasswordRead "op://Personal/brendancsmith-GitHub/public key" .onepasswordAccount }}
+{{ onepasswordRead (printf "op://Personal/%s-GitHub/public key" .gh_username) .onepasswordAccount }}

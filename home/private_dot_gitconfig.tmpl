@@ -1,7 +1,7 @@
 [user]
 	name = {{ .name }}
 	email = {{ .email }}
-	signingkey = {{ onepasswordRead "op://Personal/brendancsmith-GitHub/public key" .onepasswordAccount }}
+	signingkey = {{ onepasswordRead (printf "op://Personal/%s-GitHub/public key" .gh_username) .onepasswordAccount }}
 [core]
 	excludesfile = {{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.gitignore_global
 	attributesfile = {{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.config{{ .chezmoi.pathSeparator }}{{ .chezmoi.config.git.command }}{{ .chezmoi.pathSeparator }}attributes

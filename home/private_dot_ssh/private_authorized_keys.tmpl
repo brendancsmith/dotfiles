@@ -1,3 +1,3 @@
-{{ "{{" }} range (gitHubKeys "brendancsmith") -{{ "}}" }}
-{{ "{{" }}   .Key {{ "}}" }}
-{{ "{{" }} end -{{ "}}" }}
+{{ range gitHubKeys .gh_username -}}
+{{   .Key }}
+{{ end -}}
