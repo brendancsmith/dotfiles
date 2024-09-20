@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -eufo pipefail
+
 npm install -g npm
 
 npm install -g mac-ca
