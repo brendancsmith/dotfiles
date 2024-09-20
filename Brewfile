@@ -1,13 +1,10 @@
 tap "beeftornado/rmtree"
 tap "charmbracelet/tap"
-tap "cloudflare/cloudflare"
 tap "gromgit/fuse"
 tap "he3-app/he3"
 tap "homebrew-ffmpeg/ffmpeg"
 tap "homebrew/autoupdate"
 tap "homebrew/bundle"
-tap "homebrew/cask"
-tap "homebrew/core"
 tap "homebrew/services"
 tap "mac-cleanup/mac-cleanup-py"
 tap "mongodb/brew"
@@ -22,7 +19,6 @@ brew "glib"
 brew "aria2"
 brew "asitop"
 brew "at-spi2-core"
-brew "python@3.11"
 brew "awscli"
 brew "b2-tools"
 brew "bat"
@@ -98,6 +94,7 @@ brew "python@3.9"
 brew "tcl-tk"
 brew "python-tk@3.9"
 brew "python@3.10"
+brew "python@3.11"
 brew "python@3.8"
 brew "r", link: false
 brew "redis"
@@ -130,10 +127,8 @@ brew "zplug"
 brew "zsh"
 brew "zsh-completions"
 brew "charmbracelet/tap/mods"
-brew "cloudflare/cloudflare/warp"
 brew "gromgit/fuse/sshfs-mac"
 brew "homebrew-ffmpeg/ffmpeg/ffmpeg"
-brew "mac-cleanup/mac-cleanup-py/mac-cleanup-py"
 brew "mongodb/brew/mongodb-community"
 brew "nextdns/tap/nextdns"
 brew "sourcegraph/src-cli/src-cli"
@@ -150,7 +145,6 @@ cask "chromedriver"
 cask "chromium"
 cask "cocktail"
 cask "coconutbattery"
-cask "cryptomator"
 cask "cursor"
 cask "cyberduck"
 cask "dbeaver-community"
@@ -177,13 +171,11 @@ cask "macfuse"
 cask "macpilot"
 cask "macs-fan-control"
 cask "marked"
-cask "monero-wallet"
 cask "mongodb-compass"
 cask "monitorcontrol"
 cask "motrix"
 cask "netiquette"
 cask "orbstack"
-cask "pdf-reader-pro"
 cask "pieces-cli"
 cask "postgres-unofficial"
 cask "postman"
@@ -217,6 +209,76 @@ cask "warp"
 cask "wireshark"
 cask "xld"
 cask "xquartz"
+mas "1Password for Safari", id: 1569813296
+mas "Actions", id: 1586435171
+mas "AI Chat Bot", id: 6447312365
+mas "Amphetamine", id: 937984704
+mas "AutoMute", id: 1118136179
+mas "Bear", id: 1091189122
+mas "Bluetooth Inspector", id: 1509085044
+mas "Boop", id: 1518425043
+mas "Chat Unlimited & Ask Brutus AI", id: 6443925235
+mas "Cleaner-App", id: 1013897218
+mas "Codelime", id: 1622145140
+mas "Copilot", id: 1447330651
+mas "CopyQueue", id: 711074010
+mas "Core Tunnel", id: 1354318707
+mas "Craft", id: 1487937127
+mas "CrystalFetch", id: 6454431289
+mas "DaisyDisk", id: 411643860
+mas "Disk Speed Test", id: 425264550
+mas "Dropover", id: 1355679052
+mas "Duplicate File Finder", id: 1032755628
+mas "Fello AI", id: 6447705369
+mas "FreeChat", id: 1084346074
+mas "G App Launcher", id: 1543803459
+mas "Highlights", id: 1498912833
+mas "Home Assistant", id: 1099568401
+mas "HTTPBot", id: 1232603544
+mas "iWifi", id: 1476136371
+mas "Keynote", id: 409183694
+mas "LimeChat", id: 414030210
+mas "Linkboard", id: 1612805234
+mas "Magnet", id: 441258766
+mas "Mail+ for Gmail", id: 1216244845
+mas "Medis", id: 1579200037
+mas "Meeter", id: 1510445899
+mas "Mela", id: 1568924476
+mas "Messenger", id: 1480068668
+mas "Microsoft Excel", id: 462058435
+mas "Microsoft PowerPoint", id: 462062816
+mas "Microsoft Word", id: 462054704
+mas "Mountain Duck", id: 1024974133
+mas "NordVPN", id: 905953485
+mas "Numbers", id: 409203825
+mas "Parcel", id: 639968404
+mas "PDFgear", id: 1615523079
+mas "PhotoSweeper", id: 463362050
+mas "ReadKit", id: 1615798039
+mas "Shareful", id: 1522267256
+mas "Shortery", id: 1594183810
+mas "Sider", id: 6447783111
+mas "Slack", id: 803453959
+mas "Snippit", id: 1465481124
+mas "Spark Desktop", id: 6445813049
+mas "Speech Central", id: 1223093645
+mas "Startup Disk Full Fixer", id: 1346655838
+mas "Structured", id: 1499198946
+mas "Tailscale", id: 1475387142
+mas "Telegram", id: 747648890
+mas "Telegram Lite", id: 946399090
+mas "Templates for Numbers - DesiGN", id: 442666821
+mas "TestFlight", id: 899247664
+mas "The Unarchiver", id: 425424353
+mas "Things", id: 904280696
+mas "Todoist", id: 585829637
+mas "Universe", id: 1211437633
+mas "Usage", id: 1561788435
+mas "virtualOS", id: 1614659226
+mas "WebSSH", id: 497714887
+mas "WhaleDeck", id: 1581548562
+mas "WiFi Scanner", id: 411680127
+mas "WiFi Speed Test", id: 1455463454
 vscode "aaron-bond.better-comments"
 vscode "alefragnani.bookmarks"
 vscode "alefragnani.project-manager"
