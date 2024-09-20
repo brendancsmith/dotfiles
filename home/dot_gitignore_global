@@ -7,4 +7,3 @@
 *.pyc
 mypy.ini
 nohup.out
-output
