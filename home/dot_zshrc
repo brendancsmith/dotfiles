@@ -209,9 +209,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 export WORKON_HOME=$HOME/.venv
 source virtualenvwrapper.sh
 
-# shouldn't hard-code this
-export PATH="/Users/brendan/Library/Python/3.9/bin:$PATH"
-
 # ---- conda ----
 
 # >>> conda initialize >>>;q
