@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-# ---- homebrew ----
+# ---- Homebrew ----
 
 {{ $homebrew := "/opt/homebrew/bin/brew" }}
 {{- if stat $homebrew -}}
@@ -9,7 +9,7 @@ fpath+=("{{ output $homebrew "--prefix" | trim }}/share/zsh/site-functions")
 eval $({{ $homebrew }} shellenv)
 {{- end }}
 
-# ---- orbstack ----
+# ---- OrbStack ----
 
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :

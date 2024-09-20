@@ -1,34 +1,5 @@
 #!/usr/bin/env zsh
 
-# ---- pyenv ----
-
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-# ---- aider ----
-
-export AIDER_MODEL={{ .aiderModel | quote }}
-export AIDER_CODE_THEME="monokai"
-export AIDER_AUTO_COMMITS=False
-
-# ---- trunk ----
-
-test -f "$HOME/.cache/trunk/shell-hooks/zsh.rc" && source "$HOME/.cache/trunk/shell-hooks/zsh.rc"
-
-# ---- graphviz ----
-
-export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
-
-# ---- OpenBLAS ----
-
-export OPENBLAS="$(brew --prefix openblas)"
-
-# ---- thefuck ----
-
-# Experimental mode doesn't work in Warp
-## eval $(thefuck --alias --enable-experimental-instant-mode)
-eval $(thefuck --alias)
-
 # ---- 1Password Integration ----
 
 source {{ .chezmoi.homeDir -}}
@@ -38,14 +9,11 @@ source {{ .chezmoi.homeDir -}}
 
 # ---- aliases
 
-alias stree='open -a SourceTree'
-alias warp='open -a Warp'
+# Git
+alias gc='git commit'
+alias root-commit="git commit --allow-empty -m 'Root commit'"
 
-alias ls='ls -alGh'  # show all, long format, color, human-readable
-alias tree="tree -C" # color
-
-alias grep="grep --color=auto"
-
+# Pip
 alias pipi="pip install"
 alias pipu="pip install -U"
 alias pipr="pip install -r requirements.txt"
@@ -57,40 +25,24 @@ alias pipcdev="pip-compile requirements.in && pip-compile dev-requirements.in"
 alias pips="pip-sync"
 alias pipsdev="pip-sync requirements.txt dev-requirements.txt"
 
+# Other tools
+alias commit="aicommits"
+alias compose="docker-compose"
 alias gpt-pilot="python $HOME/sandbox/gpt-pilot/pilot/main.py"
 
-alias root-commit="git commit --allow-empty -m 'Root commit'"
+{{- if .chezmoi.os | eq "darwin" -}}
+# MacOS gnu tools
+alias ls='ls -alGh' # show all, list, colorize, human-readable
+alias tree='tree -C' # colorized output
+alias grep='grep --color=auto'
 
 alias listeners="lsof -i -P -n | grep LISTEN"
 
-alias compose="docker-compose"
-
-alias aic="aicommits"
-alias commit="aicommits"
+alias stree='open -a SourceTree'
+alias warp='open -a Warp'
+{{- end -}}
 
 # ---- functions ----
-
-function cask-path() {
-    brew list --cask "$1" | tail -1 | cut -f1 -d' '
-}
-
-function unquarantine-single() {
-    xattr -d com.apple.quarantine "$1"
-}
-
-function unquarantine() {
-    for f in $@; do
-        xattr -dr com.apple.quarantine "$f" 2>/dev/null
-    done
-}
-
-function unquarantine-bundle() {
-    for i in $(cat $1); do
-        CASK_APP=$(echo "$i" | grep "^cask " | cut -f2 d' ' | cask-path $1)
-        echo "Allow"
-        unquarantine-app $CASK_APP
-    done
-}
 
 function mkcd() {
     mkdir -p "$1" && cd "$1"
@@ -151,12 +103,70 @@ pyenv-cleanup() {
     done
 }
 
-# ---- completions ----
+{{- if .chezmoi.os | eq "darwin" -}}
+# MacOS functions
+function cask-path() {
+    brew list --cask "$1" | tail -1 | cut -f1 -d' '
+}
 
+function unquarantine-single() {
+    xattr -d com.apple.quarantine "$1"
+}
+
+function unquarantine() {
+    for f in $@; do
+        xattr -dr com.apple.quarantine "$f" 2>/dev/null
+    done
+}
+
+function unquarantine-bundle() {
+    for i in $(cat $1); do
+        CASK_APP=$(echo "$i" | grep "^cask " | cut -f2 d' ' | cask-path $1)
+        echo "Allow"
+        unquarantine-app $CASK_APP
+    done
+}
+{{- end -}}
+
+{{- if .chezmoi.os | eq "darwin" -}}
+# ---- homebrew ----
+
+export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
+export OPENBLAS="$(brew --prefix openblas)"
+{{- end -}}
+
+# ---- pyenv ----
+
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# ---- aider ----
+
+export AIDER_MODEL={{ .aiderModel | quote }}
+export AIDER_CODE_THEME="monokai"
+export AIDER_AUTO_COMMITS=False
+
+# ---- trunk ----
+
+test -f "$HOME/.cache/trunk/shell-hooks/zsh.rc" && source "$HOME/.cache/trunk/shell-hooks/zsh.rc"
+
+# ---- thefuck ----
+
+if [ "$TERM_PROGRAM" = "WarpTerminal" ]; then
+    # Experimental instant mode does not work in Warp
+    eval $(thefuck --alias)
+else
+    eval $(thefuck --alias --enable-experimental-instant-mode)
+fi
+
+# ---- Shell Completions ----
+
+{{- if .chezmoi.os | eq "darwin" -}}
 # homebrew completions
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
 fi
+{{- end -}}
 
 autoload -Uz compinit && compinit
 
@@ -204,14 +214,17 @@ fi
 # Source zplug plugins and add commands to $PATH
 zplug load
 
+# ---- virtualenvwrapper ----
+
+if [ -n "$(which virtualenvwrapper.sh)" ]; then
+    export WORKON_HOME=$HOME/.venv
+    source virtualenvwrapper.sh
+fi
+
+{{- if .chezmoi.os | eq "darwin" -}}
 # ---- iTerm2 ----
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-
-# ---- virtualenvwrapper ----
-
-export WORKON_HOME=$HOME/.venv
-source virtualenvwrapper.sh
 
 # ---- conda ----
 
@@ -229,6 +242,7 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+{{- end -}}
 
 # ---- zsh-autosuggestions ----
 

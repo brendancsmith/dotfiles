@@ -7,7 +7,9 @@ Include ~{{ .chezmoi.pathSeparator }}.orbstack{{ .chezmoi.pathSeparator }}ssh{{ 
 Host {{ .gh_username }}-GitHub
 	User {{ .gh_username }}
 	HostName github.com
-	IdentityFile {{ .chezmoi.homeDir }}{{ .chezmoi.pathSeparator }}.ssh{{ .chezmoi.pathSeparator }}{{ .gh_username }}-GitHub
+	IdentityFile {{ .chezmoi.homeDir }}
+		{{- .chezmoi.pathSeparator -}}.ssh
+		{{- .chezmoi.pathSeparator -}}{{ .gh_username }}-GitHub
 	PreferredAuthentications publickey
 	UseKeychain yes
 	AddKeysToAgent yes
