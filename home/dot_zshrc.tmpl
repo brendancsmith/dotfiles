@@ -6,112 +6,6 @@ source {{ .chezmoi.homeDir -}}
 {{- .chezmoi.pathSeparator -}}op
 {{- .chezmoi.pathSeparator -}}plugins.sh
 
-# ---- aliases ----
-# Git
-alias gc='git commit'
-alias root-commit="git commit --allow-empty -m 'Root commit'"
-
-# Pip
-alias pipi="pip install"
-alias pipu="pip install -U"
-alias pipr="pip install -r requirements.txt"
-alias pipru="pip install -U -r requirements.txt"
-alias pip-clear="pip freeze | xargs pip uninstall -y"
-
-alias pipc="pip-compile"
-alias pipcdev="pip-compile requirements.in && pip-compile dev-requirements.in"
-alias pips="pip-sync"
-alias pipsdev="pip-sync requirements.txt dev-requirements.txt"
-
-{{ if .chezmoi.os | eq "darwin" -}}
-# MacOS gnu tools
-alias ls='ls -alGh' # show all, list, colorize, human-readable
-alias tree='tree -C' # colorized output
-alias grep='grep --color=auto'
-
-# MacOS convenience aliases
-alias listeners="lsof -i -P -n | grep LISTEN"
-
-alias stree='open -a SourceTree'
-alias warp='open -a Warp'
-{{- end }}
-
-# Other tools
-alias commit="aicommits"
-alias compose="docker-compose"
-alias gpt-pilot="python $HOME/sandbox/gpt-pilot/pilot/main.py"
-
-# ---- functions ----
-function ipy() { jupyter console --kernel="pyenv_$(pyenv version-name)" }
-function mkcd() { mkdir -p "$1" && cd "$1" }
-function pip-list { pip freeze $@ | cut -f1 -d'=' }
-
-function mkrepo {
-    if [ -z "$1" ]; then
-        echo "Usage: mkrepo <repo-path>"
-        return 1
-    fi
-
-    mkdir $1
-    cd $1
-    git init
-    root-commit
-    git branch -M main
-}
-
-function mkvenv {
-    if [ -z "$1" ]; then
-        1="system"
-    fi
-
-    VENV_NAME="$(basename $PWD)"
-
-    pyenv virtualenv $1 "$VENV_NAME"
-    pyenv local "$VENV_NAME"
-
-    pip install --upgrade pip
-}
-
-pyenv-cleanup() {
-    # loop through all args
-    for version in "$@"; do
-        echo
-        echo "Cleaning pyenv version: ${version}"
-        pyenv shell "$version"
-        pip freeze >&1
-
-        # list packages and remove lines from `pip -e`
-        packages=$(pip freeze | grep -v "^-e ")
-
-        # now we extract the local package name & version from the next line
-        packages=$(
-            echo "$packages" | \
-            xargs -I % sh -c "echo % | cut -d'(' -f2 | cut -d')' -f1")
-
-        # uninstall all
-        echo "$packages" | xargs pip uninstall -y
-    done
-}
-
-{{ if .chezmoi.os | eq "darwin" }}
-# MacOS functions
-function cask-path() { brew list --cask "$1" | tail -1 | cut -f1 -d' ' }
-
-function unquarantine-single() { xattr -d com.apple.quarantine "$1" }
-function unquarantine() {
-    for f in $@; do
-        xattr -dr com.apple.quarantine "$f" 2>/dev/null
-    done
-}
-function unquarantine-bundle() {
-    for i in $(cat $1); do
-        CASK_APP=$(echo "$i" | grep "^cask " | cut -f2 d' ' | cask-path $1)
-        echo "Allow"
-        unquarantine-app $CASK_APP
-    done
-}
-{{ end }}
-
 {{ if .chezmoi.os | eq "darwin" }}
 # ---- homebrew ----
 export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
@@ -215,6 +109,129 @@ fi
 unset __conda_setup
 # <<< conda initialize <<<
 {{- end }}
+
+
+# ---- aliases ----
+
+# System
+if [ $UID -ne 0 ]; then
+    alias reboot='sudo reboot'
+    alias restart='reboot'
+    {{ if .chezmoi.os | eq "linux" -}}
+    alias update='sudo apt-get upgrade'
+    {{- end }}
+fi
+
+# Git
+alias g='git'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gco='git checkout'
+alias gcob='git checkout -b'
+alias gcob-='git checkout -b'
+alias ga='git add .'
+alias root-commit="git commit --allow-empty -m 'Root commit'"
+
+# Pip
+alias pipi="pip install"
+alias pipu="pip install -U"
+alias pipr="pip install -r requirements.txt"
+alias pipru="pip install -U -r requirements.txt"
+alias pip-clear="pip freeze | xargs pip uninstall -y"
+
+alias pipc="pip-compile"
+alias pipcdev="pip-compile requirements.in && pip-compile dev-requirements.in"
+alias pips="pip-sync"
+alias pipsdev="pip-sync requirements.txt dev-requirements.txt"
+
+{{ if .chezmoi.os | eq "darwin" -}}
+# MacOS gnu tools
+alias ls='ls -alGh' # show all, list, colorize, human-readable
+alias tree='tree -C' # colorized output
+alias grep='grep --color=auto'
+
+# MacOS convenience aliases
+alias listeners="lsof -i -P -n | grep LISTEN"
+
+alias stree='open -a SourceTree'
+alias warp='open -a Warp'
+{{- end }}
+
+# Other tools
+alias commit="aicommits"
+alias compose="docker-compose"
+alias gpt-pilot="python $HOME/sandbox/gpt-pilot/pilot/main.py"
+
+# ---- functions ----
+function ipy() { jupyter console --kernel="pyenv_$(pyenv version-name)" }
+function mkcd() { mkdir -p "$1" && cd "$1" }
+function pip-list { pip freeze $@ | cut -f1 -d'=' }
+
+function mkrepo {
+    if [ -z "$1" ]; then
+        echo "Usage: mkrepo <repo-path>"
+        return 1
+    fi
+
+    mkdir $1
+    cd $1
+    git init
+    root-commit
+    git branch -M main
+}
+
+function mkvenv {
+    if [ -z "$1" ]; then
+        1="system"
+    fi
+
+    VENV_NAME="$(basename $PWD)"
+
+    pyenv virtualenv $1 "$VENV_NAME"
+    pyenv local "$VENV_NAME"
+
+    pip install --upgrade pip
+}
+
+pyenv-cleanup() {
+    # loop through all args
+    for version in "$@"; do
+        echo
+        echo "Cleaning pyenv version: ${version}"
+        pyenv shell "$version"
+        pip freeze >&1
+
+        # list packages and remove lines from `pip -e`
+        packages=$(pip freeze | grep -v "^-e ")
+
+        # now we extract the local package name & version from the next line
+        packages=$(
+            echo "$packages" | \
+            xargs -I % sh -c "echo % | cut -d'(' -f2 | cut -d')' -f1")
+
+        # uninstall all
+        echo "$packages" | xargs pip uninstall -y
+    done
+}
+
+{{ if .chezmoi.os | eq "darwin" }}
+# MacOS functions
+function cask-path() { brew list --cask "$1" | tail -1 | cut -f1 -d' ' }
+
+function unquarantine-single() { xattr -d com.apple.quarantine "$1" }
+function unquarantine() {
+    for f in $@; do
+        xattr -dr com.apple.quarantine "$f" 2>/dev/null
+    done
+}
+function unquarantine-bundle() {
+    for i in $(cat $1); do
+        CASK_APP=$(echo "$i" | grep "^cask " | cut -f2 d' ' | cask-path $1)
+        echo "Allow"
+        unquarantine-app $CASK_APP
+    done
+}
+{{ end }}
 
 # ---- zsh-autosuggestions ----
 zstyle ':completion:*' menu select
