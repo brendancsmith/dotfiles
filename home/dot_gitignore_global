@@ -1,9 +1,9 @@
-*~
 .aider*
 .codiumai.toml
 .DS_Store
 .python-version
 .vscode
 *.pyc
+*~
 mypy.ini
 nohup.out

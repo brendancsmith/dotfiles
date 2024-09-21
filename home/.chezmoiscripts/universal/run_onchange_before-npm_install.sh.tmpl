@@ -7,10 +7,10 @@ set -eufo pipefail
 log_task "Installing global npm packages"
 
 declare -a packages=(
-  npm
-  mac-ca
-  aicommits
   "@mermaid-js/mermaid-cli"
+  aicommits
+  mac-ca
+  npm
 )
 
 for package in "${packages[@]}"; do

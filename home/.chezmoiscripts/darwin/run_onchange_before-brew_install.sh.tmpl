@@ -6,4 +6,6 @@ set -eufo pipefail
 
 log_task "Installing Homebrew packages"
 
-brew bundle --no-lock --file={{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}Brewfile > /dev/null 2>&1 || true
+brew bundle --no-lock \
+  --file={{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}Brewfile \
+  > /dev/null 2>&1 || true
