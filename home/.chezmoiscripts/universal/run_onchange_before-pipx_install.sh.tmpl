@@ -15,6 +15,6 @@ while read -r package; do
   # install the package
   if ! pipx upgrade "$package" > /dev/null 2>&1; then
     log_error "Failed to install pipx package: $package"
-    break
+    [[ -n "$FAIL_FAST" ]] && exit 1
   fi
 done < {{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}requirements.txt

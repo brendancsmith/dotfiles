@@ -21,6 +21,7 @@ defaults write com.apple.dock tilesize -float 70
 
 if ! dockutil --no-restart --remove all; then
   log_error "Failed to clear the dock"
+  [[ -n "$FAIL_FAST" ]] && exit 1
 fi
 
 # ---- Add apps ----
@@ -62,7 +63,7 @@ for tuple in "${apps[@]}"; do
 
   if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
     log_error "Failed to add \"${app}\" to dock"
-    break
+    [[ -n "$FAIL_FAST" ]] && exit 1
   fi
 done
 
@@ -89,6 +90,9 @@ for tuple in "${folders[@]}"; do
 
   if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
     log_error "Failed to add \"${folder}\" to dock"
+    if [[ -z "$FAIL_FAST" ]]; then
+      exit 1
+    fi
   fi
 done
 

@@ -12,4 +12,5 @@ if ! brew bundle \
     --no-lock --file="{{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}Brewfile" \
     > /dev/null 2>&1; then
   log_error "Failed to install Homebrew packages"
+  [[ -n "$FAIL_FAST" ]] && exit 1
 fi
