@@ -1,14 +1,12 @@
 #!/usr/bin/env zsh
 
 # ---- 1Password Integration ----
-
 source {{ .chezmoi.homeDir -}}
 {{- .chezmoi.pathSeparator -}}.config
 {{- .chezmoi.pathSeparator -}}op
 {{- .chezmoi.pathSeparator -}}plugins.sh
 
-# ---- aliases
-
+# ---- aliases ----
 # Git
 alias gc='git commit'
 alias root-commit="git commit --allow-empty -m 'Root commit'"
@@ -25,11 +23,6 @@ alias pipcdev="pip-compile requirements.in && pip-compile dev-requirements.in"
 alias pips="pip-sync"
 alias pipsdev="pip-sync requirements.txt dev-requirements.txt"
 
-# Other tools
-alias commit="aicommits"
-alias compose="docker-compose"
-alias gpt-pilot="python $HOME/sandbox/gpt-pilot/pilot/main.py"
-
 {{ if .chezmoi.os | eq "darwin" -}}
 # MacOS gnu tools
 alias ls='ls -alGh' # show all, list, colorize, human-readable
@@ -43,19 +36,15 @@ alias stree='open -a SourceTree'
 alias warp='open -a Warp'
 {{- end }}
 
+# Other tools
+alias commit="aicommits"
+alias compose="docker-compose"
+alias gpt-pilot="python $HOME/sandbox/gpt-pilot/pilot/main.py"
+
 # ---- functions ----
-
-function mkcd() {
-    mkdir -p "$1" && cd "$1"
-}
-
-function ipy() {
-    jupyter console --kernel="pyenv_$(pyenv version-name)"
-}
-
-function pip-list {
-    pip freeze $@ | cut -f1 -d'='
-}
+function ipy() { jupyter console --kernel="pyenv_$(pyenv version-name)" }
+function mkcd() { mkdir -p "$1" && cd "$1" }
+function pip-list { pip freeze $@ | cut -f1 -d'=' }
 
 function mkrepo {
     if [ -z "$1" ]; then
@@ -66,7 +55,7 @@ function mkrepo {
     mkdir $1
     cd $1
     git init
-    git commit --allow-empty -m "Root commit"
+    root-commit
     git branch -M main
 }
 
@@ -106,21 +95,14 @@ pyenv-cleanup() {
 
 {{ if .chezmoi.os | eq "darwin" }}
 # MacOS functions
+function cask-path() { brew list --cask "$1" | tail -1 | cut -f1 -d' ' }
 
-function cask-path() {
-    brew list --cask "$1" | tail -1 | cut -f1 -d' '
-}
-
-function unquarantine-single() {
-    xattr -d com.apple.quarantine "$1"
-}
-
+function unquarantine-single() { xattr -d com.apple.quarantine "$1" }
 function unquarantine() {
     for f in $@; do
         xattr -dr com.apple.quarantine "$f" 2>/dev/null
     done
 }
-
 function unquarantine-bundle() {
     for i in $(cat $1); do
         CASK_APP=$(echo "$i" | grep "^cask " | cut -f2 d' ' | cask-path $1)
@@ -130,30 +112,25 @@ function unquarantine-bundle() {
 }
 {{ end }}
 
-{{ if .chezmoi.os | eq "darwin" -}}
+{{ if .chezmoi.os | eq "darwin" }}
 # ---- homebrew ----
-
 export GRAPHVIZ_DIR="$(brew --prefix graphviz)"
 export OPENBLAS="$(brew --prefix openblas)"
 {{- end }}
 
 # ---- pyenv ----
-
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
 # ---- aider ----
-
 export AIDER_MODEL={{ .aiderModel | quote }}
 export AIDER_CODE_THEME="monokai"
 export AIDER_AUTO_COMMITS=False
 
 # ---- trunk ----
-
 test -f "$HOME/.cache/trunk/shell-hooks/zsh.rc" && source "$HOME/.cache/trunk/shell-hooks/zsh.rc"
 
 # ---- thefuck ----
-
 if [ "$TERM_PROGRAM" = "WarpTerminal" ]; then
     # Experimental instant mode does not work in Warp
     eval $(thefuck --alias)
@@ -162,7 +139,6 @@ else
 fi
 
 # ---- Shell Completions ----
-
 autoload -Uz compinit && compinit
 
 # pipx completions
@@ -178,17 +154,14 @@ fi
 {{- end }}
 
 # ---- Warp subshell support ----
-
 if [ -z "$WARP_BOOTSTRAPPED" ]; then
     printf '\eP$f{"hook": "SourcedRcFileForWarp", "value": { "shell": "zsh" }}\x9c'
 fi
 
 # ---- direnv ----
-
 eval "$(direnv hook zsh)"
 
 # ---- zplug ----
-
 export ZPLUG_HOME=/opt/homebrew/opt/zplug
 source $ZPLUG_HOME/init.zsh
 
@@ -217,7 +190,6 @@ fi
 zplug load
 
 # ---- virtualenvwrapper ----
-
 if [ -n "$(which virtualenvwrapper.sh)" ]; then
     export WORKON_HOME=$HOME/.venv
     source virtualenvwrapper.sh
@@ -225,11 +197,9 @@ fi
 {{- if .chezmoi.os | eq "darwin" }}
 
 # ---- iTerm2 ----
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # ---- conda ----
-
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
 __conda_setup="$('/opt/homebrew/Caskroom/miniforge/base/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
@@ -247,7 +217,6 @@ unset __conda_setup
 {{- end }}
 
 # ---- zsh-autosuggestions ----
-
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 

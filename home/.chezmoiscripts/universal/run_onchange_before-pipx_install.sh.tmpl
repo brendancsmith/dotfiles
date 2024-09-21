@@ -7,5 +7,13 @@ set -eufo pipefail
 log_task "Installing pipx packages"
 
 while read -r package; do
-    pipx upgrade "$package" > /dev/null 2>&1 || true
+  # skip line if it's whitespace or a comment
+  if [[ -z "$package" || "$package" =~ ^[[:space:]]*# ]]; then
+    continue
+  fi
+
+  # install the package
+  if ! pipx upgrade "$package" > /dev/null 2>&1; then
+    log_error "Failed to install pipx package: $package"
+  fi
 done < {{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}requirements.txt

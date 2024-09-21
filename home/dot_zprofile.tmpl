@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
 # ---- Homebrew ----
-
 {{ $homebrew := "/opt/homebrew/bin/brew" }}
 {{- if stat $homebrew -}}
 fpath+=("{{ output $homebrew "--prefix" | trim }}/share/zsh/site-functions")
@@ -10,10 +9,8 @@ eval $({{ $homebrew }} shellenv)
 {{- end }}
 
 # ---- OrbStack ----
-
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
 # ---- OpenAI ----
-
 export OPENAI_API_KEY=$(op read "op://Personal/OpenAI API Key/api key")
