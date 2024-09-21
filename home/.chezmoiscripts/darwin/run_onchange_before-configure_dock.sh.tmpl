@@ -83,6 +83,7 @@ for j in "${!folders[@]}"; do
       --position $pos \
       --section others 1>/dev/null; then
     log_error "Failed to add \"${folder}\" to dock"
+    break
   fi
 done
 
