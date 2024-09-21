@@ -9,9 +9,7 @@ tap "homebrew/services"
 tap "mac-cleanup/mac-cleanup-py"
 tap "mongodb/brew"
 tap "nextdns/tap"
-tap "redis-stack/redis-stack"
 tap "sourcegraph/src-cli"
-tap "zurawiki/brews"
 # Search tool like grep, but optimized for programmers
 brew "ack"
 # Mozilla CA certificate store
@@ -264,8 +262,6 @@ cask "alt-tab"
 cask "appcleaner"
 # Menu bar icon organiser
 cask "bartender"
-# Virtual Audio Driver
-cask "blackhole-2ch"
 # OpenAI's official ChatGPT desktop app
 cask "chatgpt"
 # Tool to list all active shortcuts of the current application
@@ -274,8 +270,6 @@ cask "cheatsheet"
 cask "chromedriver"
 # Free and open-source web browser
 cask "chromium"
-# Cleans, repairs and optimises computer systems
-cask "cocktail"
 # Tool to show live information about the batteries in various devices
 cask "coconutbattery"
 # Write, edit, and chat about your code with AI
@@ -356,8 +350,6 @@ cask "r"
 cask "raindropio"
 # Control your tools with a few keystrokes
 cask "raycast"
-# Redis Stack Server install a Redis server with additional database capabilities
-cask "redis-stack-server"
 # Emoji picker optimised for blind people
 cask "rocket"
 # Data science software focusing on R and Python
