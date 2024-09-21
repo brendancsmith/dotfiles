@@ -18,3 +18,15 @@
 	format = ssh
 [{{ .chezmoi.config.gpg.command }} "ssh"]
 	program = {{ .chezmoi.pathSeparator }}Applications{{ .chezmoi.pathSeparator }}1Password.app{{ .chezmoi.pathSeparator }}Contents{{ .chezmoi.pathSeparator }}MacOS{{ .chezmoi.pathSeparator }}{{ .chezmoi.config.onepassword.command }}-ssh-sign
+[alias]
+	a = add .
+	c = commit -m
+	d = diff
+	l = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+	ll = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --all
+	ls = ls-files
+	st = status
+    co = checkout
+    br = branch
+    unstage = reset HEAD --
+    last = log -1 HEAD
