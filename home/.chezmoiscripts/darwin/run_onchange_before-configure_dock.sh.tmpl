@@ -52,10 +52,15 @@ for tuple in "${apps[@]}"; do
     app="/Applications/${app}.app"
   fi
 
-  if ! dockutil --no-restart \
-      --add "${app}" \
-      --label "${label}" \
-      --position end 1>/dev/null; then
+  dockutil_args=(
+    --no-restart
+    --add "$app"
+    --label "$label"
+    --position end
+    --section apps
+  )
+
+  if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
     log_error "Failed to add \"${app}\" to dock"
     break
   fi
@@ -70,16 +75,20 @@ declare -a folders=(
 
 for tuple in "${folders[@]}"; do
   IFS=":" read -r folder label view display sortby <<< "$tuple"
-  if ! dockutil --no-restart \
-      --add "${folder}" \
-      --label "${label}" \
-      --view $view \
-      --display $display \
-      --sort $sortby \
-      --position end \
-      --section others 1>/dev/null; then
+
+  dockutil_args=(
+    --no-restart
+    --add "$folder"
+    --label "$label"
+    --view "$view"
+    --display "$display"
+    --sort "$sortby"
+    --position end
+    --section others
+  )
+
+  if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
     log_error "Failed to add \"${folder}\" to dock"
-    break
   fi
 done
 
