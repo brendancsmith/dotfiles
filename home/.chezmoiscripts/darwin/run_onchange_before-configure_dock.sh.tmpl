@@ -19,7 +19,7 @@ defaults write com.apple.dock tilesize -float 70
 
 # ---- Clear icons ----
 
-if ! dockutil --remove all; then
+if ! dockutil --no-restart --remove all; then
   log_error "Failed to clear the dock"
 fi
 
@@ -38,9 +38,7 @@ declare -a apps=(
   /System/Applications/Calendar.app:Calendar
 )
 
-for i in "${!apps[@]}"; do
-  pos=$((i+1))
-  tuple="${apps[$i]}"
+for tuple in "${apps[@]}"; do
   # if tuple contains a colon, split it into app and label
   if [[ "$tuple" =~ : ]]; then
     IFS=":" read -r app label <<< "$tuple"
@@ -57,7 +55,7 @@ for i in "${!apps[@]}"; do
   if ! dockutil --no-restart \
       --add "${app}" \
       --label "${label}" \
-      --position $pos 1>/dev/null; then
+      --position end 1>/dev/null; then
     log_error "Failed to add \"${app}\" to dock"
     break
   fi
@@ -66,13 +64,11 @@ done
 # ---- Add folders ----
 
 declare -a folders=(
-  "${HOME}/Downloads:Downloads:fan:stack:dateadded"
+  "~/Downloads:Downloads:fan:stack:dateadded"
   "/Applications:Applications:grid:folder:name"
 )
 
-for j in "${!folders[@]}"; do
-  pos=$((i+j+1))
-  tuple="${folders[$j]}"
+for tuple in "${folders[@]}"; do
   IFS=":" read -r folder label view display sortby <<< "$tuple"
   if ! dockutil --no-restart \
       --add "${folder}" \
@@ -80,7 +76,7 @@ for j in "${!folders[@]}"; do
       --view $view \
       --display $display \
       --sort $sortby \
-      --position $pos \
+      --position end \
       --section others 1>/dev/null; then
     log_error "Failed to add \"${folder}\" to dock"
     break
