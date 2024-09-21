@@ -4,6 +4,8 @@ set -eufo pipefail
 
 {{ template "scripts-library" }}
 
+# Run `brew bundle dump --describe` from the chezmoi source directory to generate the Brewfileu
+
 log_task "Installing Homebrew packages"
 
 brew bundle --no-lock \
