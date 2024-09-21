@@ -2,6 +2,10 @@
 
 set -eufo pipefail
 
+FAIL_FAST=false
+
+# ---- logging ----
+
 function log_color() {
   local _code="$1"
   shift
@@ -34,11 +38,11 @@ function log_info() {
 }
 
 function log_warning() {
-  log_yellow "📣" "$@"
+  log_yellow "📣" "$@" >&2
 }
 
 function log_error() {
-  log_red "❌" "$@"
+  log_red "❌" "$@" >&2
 }
 
 function log_success() {

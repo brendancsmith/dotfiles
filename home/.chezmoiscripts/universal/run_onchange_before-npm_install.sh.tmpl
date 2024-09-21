@@ -15,8 +15,8 @@ declare -a packages=(
 )
 
 for package in "${packages[@]}"; do
-  if ! npm update -g "$package" > /dev/null 2>&1; then
+  if ! npm update -g "$package" > /dev/null 2>&1 ; then
     log_error "Failed to install npm package: $package"
-    [[ -n "$FAIL_FAST" ]] && exit 1
+    [[ -n $FAIL_FAST ]] && exit 1
   fi
 done

@@ -63,7 +63,7 @@ for tuple in "${apps[@]}"; do
 
   if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
     log_error "Failed to add \"${app}\" to dock"
-    [[ -n "$FAIL_FAST" ]] && exit 1
+    [[ -z "$FAIL_FAST" ]] && exit 1
   fi
 done
 
