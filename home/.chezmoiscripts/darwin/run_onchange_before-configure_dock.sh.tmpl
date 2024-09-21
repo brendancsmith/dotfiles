@@ -8,6 +8,8 @@ trap 'killall Dock' EXIT
 
 log_task "Configuring dock"
 
+## ---- Settings ----
+
 defaults write com.apple.dock autohide -bool true
 defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock largesize -float 80
@@ -15,21 +17,28 @@ defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock show-recents -bool false
 defaults write com.apple.dock tilesize -float 70
 
+# ---- Clear icons ----
+
 dockutil --remove all
 
-declare -a add_apps=(
+# ---- Add apps ----
+
+declare -a apps=(
   Arc
   "Spark Desktop:Spark"
   Superhuman
   "Things3:Things"
   Bear
   "Visual Studio Code:Code"
+  Warp
   Sourcetree
   Spotify
   /System/Applications/Calendar.app:Calendar
 )
 
-for tuple in "${add_apps[@]}"; do
+for i in "${!apps[@]}"; do
+  pos=$((i+1))
+  tuple="${apps[$i]}"
   # if tuple contains a colon, split it into app and label
   if [[ "$tuple" =~ : ]]; then
     IFS=":" read -r app label <<< "$tuple"
@@ -43,17 +52,31 @@ for tuple in "${add_apps[@]}"; do
     app="/Applications/${app}.app"
   fi
 
-  dockutil --no-restart --remove "${label}" 2>/dev/null || true
-  dockutil --no-restart --add "${app}" --label "${label}" 1>/dev/null || true
+  dockutil --no-restart \
+    --add "${app}" \
+    --label "${label}" \
+    --position $pos 1>/dev/null || true
 done
 
-declare -a add_folders=(
-  "${HOME}/Downloads:Downloads"
-  "/Applications:Applications"
+# ---- Add folders ----
+
+declare -a folders=(
+  "${HOME}/Downloads:Downloads:fan:stack:dateadded"
+  "/Applications:Applications:grid:folder:name"
 )
 
-for tuple in "${add_folders[@]}"; do
-  IFS=":" read -r folder label <<< "$tuple"
-  dockutil --no-restart --remove "${label}" 2>/dev/null || true
-  dockutil --no-restart --add "${folder}" --view grid --display stack --sort dateadded 1>/dev/null || true
+for j in "${!folders[@]}"; do
+  pos=$((i+j+1))
+  tuple="${folders[$j]}"
+  IFS=":" read -r folder label view display sortby <<< "$tuple"
+  dockutil --no-restart \
+    --add "${folder}" \
+    --label "${label}" \
+    --view $view \
+    --display $display \
+    --sort $sortby \
+    --position $pos \
+    --section others 1>/dev/null || true
 done
+
+# ---- ----
