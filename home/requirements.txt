@@ -1,13 +1,13 @@
 # pipx requirements
 
-aider-chat
-argcomplete
-gsutil
-ignr
-kaggle
-open-interpreter
-pipdeptree
-playwright
-poetry
-radian
-vastai
+# aider-chat
+# argcomplete
+# gsutil
+# ignr
+# kaggle
+# open-interpreter
+# pipdeptree
+# playwright
+# poetry
+# radian
+# vastai

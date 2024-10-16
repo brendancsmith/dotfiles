@@ -1,16 +1,35 @@
 #!/bin/bash
 
+# This script installs Homebrew packages defined in the Brewfile
+
 set -eufo pipefail
+
+trap 'echo "Interrupted by user"; exit' SIGINT
 
 {{ template "scripts-library" }}
 
-# Run `brew bundle dump --describe` from the chezmoi source directory to generate the Brewfileu
-
 log_task "Installing Homebrew packages"
 
-if ! brew bundle \
-    --no-lock --file="{{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}Brewfile" \
-    > /dev/null 2>&1; then
-  log_error "Failed to install Homebrew packages"
-  [[ -n "$FAIL_FAST" ]] && exit 1
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+    log_error "Homebrew is not installed. Please install Homebrew first."
+    exit 1
 fi
+
+# Update Homebrew
+brew update
+
+# Define Brewfile path
+BREWFILE_PATH="{{ .chezmoi.sourceDir }}{{ .chezmoi.pathSeparator }}Brewfile"
+
+# Install packages
+if ! brew bundle --no-lock --file="$BREWFILE_PATH" -v; then
+    log_error "Failed to install Homebrew packages"
+    [[ -n "$FAIL_FAST" ]] && exit 1
+fi
+
+# Cleanup
+log_info "Cleaning up Homebrew"
+brew cleanup
+
+log_success "Homebrew packages installation completed"

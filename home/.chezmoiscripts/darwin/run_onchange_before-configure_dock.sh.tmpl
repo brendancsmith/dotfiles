@@ -15,85 +15,90 @@ defaults write com.apple.dock autohide-delay -float 0
 defaults write com.apple.dock largesize -float 80
 defaults write com.apple.dock magnification -bool true
 defaults write com.apple.dock show-recents -bool false
-defaults write com.apple.dock tilesize -float 70
+defaults write com.apple.dock tilesize -float 70q 4
+defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.dock show-recents -bool true
 
 # ---- Clear icons ----
 
-if ! dockutil --no-restart --remove all; then
-  log_error "Failed to clear the dock"
-  [[ -n "$FAIL_FAST" ]] && exit 1
-fi
+# Ask yes or no
+read -p "Do you want to clear the dock? (y/n) " -n 1 -r
 
-# ---- Add apps ----
+# if ! dockutil --no-restart --remove all; then
+#   log_error "Failed to clear the dock"
+#   [[ -n "$FAIL_FAST" ]] && exit 1
+# fi
 
-declare -a apps=(
-  Arc
-  "Spark Desktop:Spark"
-  Superhuman
-  "Things3:Things"
-  Bear
-  "Visual Studio Code:Code"
-  Warp
-  Sourcetree
-  Spotify
-  /System/Applications/Calendar.app:Calendar
-)
+# # ---- Add apps ----
 
-for tuple in "${apps[@]}"; do
-  # if tuple contains a colon, split it into app and label
-  if [[ "$tuple" =~ : ]]; then
-    IFS=":" read -r app label <<< "$tuple"
-  else
-    app=$tuple
-    label=$tuple
-  fi
+# declare -a apps=(
+#   Arc
+#   "Spark Desktop:Spark"
+#   Superhuman
+#   "Things3:Things"
+#   Bear
+#   "Visual Studio Code:Code"
+#   Warp
+#   Sourcetree
+#   Spotify
+#   /System/Applications/Calendar.app:Calendar
+# )
 
-  # if app does not end in .app, assume it is in /Applications
-  if [[ "${app}" != *.app ]]; then
-    app="/Applications/${app}.app"
-  fi
+# for tuple in "${apps[@]}"; do
+#   # if tuple contains a colon, split it into app and label
+#   if [[ "$tuple" =~ : ]]; then
+#     IFS=":" read -r app label <<< "$tuple"
+#   else
+#     app=$tuple
+#     label=$tuple
+#   fi
 
-  dockutil_args=(
-    --no-restart
-    --add "$app"
-    --label "$label"
-    --position end
-    --section apps
-  )
+#   # if app does not end in .app, assume it is in /Applications
+#   if [[ "${app}" != *.app ]]; then
+#     app="/Applications/${app}.app"
+#   fi
 
-  if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
-    log_error "Failed to add \"${app}\" to dock"
-    [[ -z "$FAIL_FAST" ]] && exit 1
-  fi
-done
+#   dockutil_args=(
+#     --no-restart
+#     --add "$app"
+#     --label "$label"
+#     --position end
+#     --section apps
+#   )
 
-# ---- Add folders ----
+#   if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
+#     log_error "Failed to add \"${app}\" to dock"
+#     [[ -z "$FAIL_FAST" ]] && exit 1
+#   fi
+# done
 
-declare -a folders=(
-  "~/Downloads:Downloads:fan:stack:dateadded"
-  "/Applications:Applications:grid:folder:name"
-)
+# # ---- Add folders ----
 
-for tuple in "${folders[@]}"; do
-  IFS=":" read -r folder label view display sortby <<< "$tuple"
+# declare -a folders=(
+#   "~/Downloads:Downloads:fan:stack:dateadded"
+#   "/Applications:Applications:grid:folder:name"
+# )
 
-  dockutil_args=(
-    --no-restart
-    --add "$folder"
-    --label "$label"
-    --view "$view"
-    --display "$display"
-    --sort "$sortby"
-    --position end
-    --section others
-  )
+# for tuple in "${folders[@]}"; do
+#   IFS=":" read -r folder label view display sortby <<< "$tuple"
 
-  if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
-    log_error "Failed to add \"${folder}\" to dock"
-    if [[ -z "$FAIL_FAST" ]]; then
-      exit 1
-    fi
-  fi
-done
+#   dockutil_args=(
+#     --no-restart
+#     --add "$folder"
+#     --label "$label"
+#     --view "$view"
+#     --display "$display"
+#     --sort "$sortby"
+#     --position end
+#     --section others
+#   )
+
+#   if ! dockutil "${dockutil_args[@]}" 1>/dev/null; then
+#     log_error "Failed to add \"${folder}\" to dock"
+#     if [[ -z "$FAIL_FAST" ]]; then
+#       exit 1
+#     fi
+#   fi
+# done
 
 # ---- ----

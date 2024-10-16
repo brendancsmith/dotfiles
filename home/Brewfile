@@ -2,7 +2,6 @@ tap "beeftornado/rmtree"
 tap "charmbracelet/tap"
 tap "gromgit/fuse"
 tap "he3-app/he3"
-tap "homebrew-ffmpeg/ffmpeg"
 tap "homebrew/autoupdate"
 tap "homebrew/bundle"
 tap "homebrew/services"
@@ -22,12 +21,8 @@ brew "glib"
 brew "aria2"
 # Perf monitoring CLI tool for Apple Silicon
 brew "asitop"
-# Protocol definitions and daemon for D-Bus at-spi
-brew "at-spi2-core"
 # Official Amazon AWS command-line interface
 brew "awscli"
-# B2 Cloud Storage Command-Line Tools
-brew "b2-tools"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Tools for BCF/VCF files and variant calling from samtools
@@ -80,14 +75,10 @@ brew "glances"
 brew "glfw"
 # Library to load and enumerate PKCS#11 modules
 brew "p11-kit"
-# Validating, recursive, caching DNS resolver
-brew "unbound"
 # GNU Transport Layer Security (TLS) Library
 brew "gnutls"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
-# Image manipulation
-brew "netpbm"
 # OpenType text shaping engine
 brew "harfbuzz"
 # Framework for layout and rendering of i18n text
@@ -100,8 +91,6 @@ brew "graphviz"
 brew "gsettings-desktop-schemas"
 # Toolkit for creating graphical user interfaces
 brew "gtk+3"
-# Open-source video transcoder available for Linux, Mac, and Windows
-brew "handbrake", link: false
 # Improved top (interactive process viewer)
 brew "htop"
 # Lightweight and flexible command-line JSON processor
@@ -128,8 +117,6 @@ brew "marked", link: false
 brew "mas"
 # Modern and intuitive terminal-based text editor
 brew "micro"
-# Terminal-based visual file manager
-brew "midnight-commander"
 # MongoDB CLI enables you to manage your MongoDB in the Cloud
 brew "mongocli"
 # Library for color text mode, widget based user interfaces
@@ -179,9 +166,9 @@ brew "python@3.10"
 # Interpreted, interactive, object-oriented programming language
 brew "python@3.11"
 # Interpreted, interactive, object-oriented programming language
-brew "python@3.8"
+# brew "python@3.8"
 # Software environment for statistical computing
-brew "r", link: false
+# brew "r", link: false
 # Persistent key-value database, with built-in net interface
 brew "redis"
 # Perl-powered file rename script with many helpful built-ins
@@ -229,7 +216,7 @@ brew "wget"
 # JavaScript package manager
 brew "yarn"
 # Download YouTube videos from the command-line
-brew "youtube-dl"
+# brew "youtube-dl"
 # GTK+ dialog boxes for the command-line
 brew "zenity"
 # High-performance, asynchronous messaging library
@@ -243,21 +230,15 @@ brew "zsh-completions"
 # AI on the command line
 brew "charmbracelet/tap/mods"
 # File system client based on SSH File Transfer Protocol
-brew "gromgit/fuse/sshfs-mac"
-# Play, record, convert, and stream audio and video
-brew "homebrew-ffmpeg/ffmpeg/ffmpeg"
+# brew "gromgit/fuse/sshfs-mac"
 # High-performance, schema-free, document-oriented database
 brew "mongodb/brew/mongodb-community"
-# NextDNS DNS/53 to DoH Proxy
-brew "nextdns/tap/nextdns"
 # Sourcegraph CLI
 brew "sourcegraph/src-cli/src-cli"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # Command-line interface for 1Password
 cask "1password-cli"
-# Enable Windows-like alt-tab
-cask "alt-tab"
 # Application uninstaller
 cask "appcleaner"
 # Menu bar icon organiser
@@ -282,42 +263,26 @@ cask "dbeaver-community"
 cask "disk-expert"
 # Window previews and controls
 cask "dockmate"
-# Client for the Dropbox cloud storage service
-cask "dropbox"
 # Web browser
 cask "firefox"
 # Open-source platform for visualizing and manipulating large graphs
 cask "gephi"
 # Free and open-source image editor
 cask "gimp"
-# Web browser
-cask "google-chrome"
-# Client for the Google Drive storage service
-cask "google-drive"
 # Tools to protect your emails and files
 cask "gpg-suite"
-# Open-source video transcoder
-cask "handbrake"
 # Automated organisation
 cask "hazel"
 # A Free, Modern Toolbox Built for Developers.
 cask "he3"
-# Free and open-source media player
-cask "iina"
 # Terminal emulator as alternative to Apple's Terminal app
 cask "iterm2"
-# Download manager
-cask "jdownloader"
 # File archiver
 cask "keka"
 # Delete junk, unnecessary files and folders, and speed up your computer
 cask "maccleaner-pro"
-# Clipboard manager
-cask "maccy"
 # Plugin, App, and Theme store which includes plugin injection
 cask "macforge"
-# File system integration
-cask "macfuse"
 # Graphical user interface for the command terminal
 cask "macpilot"
 # Controls and monitors all fans on Apple computers
@@ -334,8 +299,6 @@ cask "motrix"
 cask "netiquette"
 # Replacement for Docker Desktop
 cask "orbstack"
-# Command-line tool for Pieces.app
-cask "pieces-cli"
 # App wrapper for Postgres
 cask "postgres-unofficial"
 # Collaboration platform for API development
@@ -344,40 +307,20 @@ cask "postman"
 cask "processmonitor"
 # Automatically hides or quits apps after periods of inactivity
 cask "quitter"
-# Environment for statistical computing and graphics
-cask "r"
-# All-in-one bookmark manager
-cask "raindropio"
 # Control your tools with a few keystrokes
 cask "raycast"
 # Emoji picker optimised for blind people
 cask "rocket"
-# Data science software focusing on R and Python
-cask "rstudio"
 # Collection of apps available by subscription
 cask "setapp"
-# Web browser
-cask "sigmaos"
-# Team communication and collaboration software
-cask "slack"
 # Graphical client for Git version control
 cask "sourcetree"
 # Music streaming service
 cask "spotify"
 # System monitor for the menu bar
 cask "stats"
-# Email client
-cask "superhuman"
 # Web browser tabs URL exporter
 cask "tabtopus"
-# Tool to explore all the running tasks (processes)
-cask "taskexplorer"
-# Customizable email client
-cask "thunderbird"
-# Web browser focusing on security
-cask "tor-browser"
-# Open-source BitTorrent client
-cask "transmission"
 # File transfer application
 cask "transmit"
 # Developer experience toolkit used to check, test, merge, and monitor code
@@ -392,228 +335,206 @@ cask "vlc"
 cask "warp"
 # Network protocol analyzer
 cask "wireshark"
-# Lossless audio decoder
-cask "xld"
 # Open-source version of the X.Org X Window System
 cask "xquartz"
 mas "1Password for Safari", id: 1569813296
 mas "Actions", id: 1586435171
-mas "AI Chat Bot", id: 6447312365
 mas "Amphetamine", id: 937984704
 mas "AutoMute", id: 1118136179
 mas "Bear", id: 1091189122
 mas "Bluetooth Inspector", id: 1509085044
 mas "Boop", id: 1518425043
-mas "Chat Unlimited & Ask Brutus AI", id: 6443925235
 mas "Cleaner-App", id: 1013897218
 mas "Codelime", id: 1622145140
-mas "Copilot", id: 1447330651
 mas "CopyQueue", id: 711074010
-mas "Core Tunnel", id: 1354318707
 mas "Craft", id: 1487937127
 mas "CrystalFetch", id: 6454431289
 mas "DaisyDisk", id: 411643860
 mas "Disk Speed Test", id: 425264550
 mas "Dropover", id: 1355679052
 mas "Duplicate File Finder", id: 1032755628
-mas "Fello AI", id: 6447705369
-mas "FreeChat", id: 1084346074
 mas "G App Launcher", id: 1543803459
 mas "Highlights", id: 1498912833
 mas "Home Assistant", id: 1099568401
 mas "HTTPBot", id: 1232603544
 mas "iWifi", id: 1476136371
-mas "Keynote", id: 409183694
+# mas "Keynote", id: 409183694
 mas "LimeChat", id: 414030210
-mas "Linkboard", id: 1612805234
 mas "Magnet", id: 441258766
-mas "Mail+ for Gmail", id: 1216244845
 mas "Medis", id: 1579200037
 mas "Meeter", id: 1510445899
-mas "Mela", id: 1568924476
-mas "Messenger", id: 1480068668
-mas "Microsoft Excel", id: 462058435
-mas "Microsoft PowerPoint", id: 462062816
-mas "Microsoft Word", id: 462054704
+# mas "Mela", id: 1568924476
 mas "Mountain Duck", id: 1024974133
-mas "NordVPN", id: 905953485
+# mas "NordVPN", id: 905953485
 mas "Numbers", id: 409203825
-mas "Parcel", id: 639968404
 mas "PDFgear", id: 1615523079
-mas "PhotoSweeper", id: 463362050
 mas "ReadKit", id: 1615798039
 mas "Shareful", id: 1522267256
 mas "Shortery", id: 1594183810
-mas "Sider", id: 6447783111
-mas "Slack", id: 803453959
-mas "Snippit", id: 1465481124
 mas "Spark Desktop", id: 6445813049
 mas "Speech Central", id: 1223093645
 mas "Startup Disk Full Fixer", id: 1346655838
 mas "Structured", id: 1499198946
 mas "Tailscale", id: 1475387142
-mas "Telegram", id: 747648890
-mas "Telegram Lite", id: 946399090
 mas "Templates for Numbers - DesiGN", id: 442666821
-mas "TestFlight", id: 899247664
+# mas "TestFlight", id: 899247664
 mas "The Unarchiver", id: 425424353
 mas "Things", id: 904280696
-mas "Todoist", id: 585829637
 mas "Universe", id: 1211437633
 mas "Usage", id: 1561788435
 mas "virtualOS", id: 1614659226
-mas "WebSSH", id: 497714887
+# mas "WebSSH", id: 497714887
 mas "WhaleDeck", id: 1581548562
 mas "WiFi Scanner", id: 411680127
 mas "WiFi Speed Test", id: 1455463454
-vscode "aaron-bond.better-comments"
-vscode "alefragnani.bookmarks"
-vscode "alefragnani.project-manager"
-vscode "amazonwebservices.aws-toolkit-vscode"
-vscode "atishay-jain.all-autocomplete"
-vscode "aykutsarac.jsoncrack-vscode"
-vscode "bierner.markdown-mermaid"
-vscode "bierner.markdown-preview-github-styles"
-vscode "bito.bito"
-vscode "blackboxapp.blackbox"
-vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
-vscode "cacher.cacher-vscode"
-vscode "charliermarsh.ruff"
-vscode "christian-kohler.path-intellisense"
-vscode "codeium.codeium"
-vscode "codestream.codestream"
-vscode "codezombiech.gitignore"
-vscode "codium.codium"
-vscode "continue.continue"
-vscode "ctf0.macros"
-vscode "cxfksword.goto-documentation"
-vscode "danielsanmedium.dscodegpt"
-vscode "davidanson.vscode-markdownlint"
-vscode "deerawan.vscode-dash"
-vscode "dheovani.svg-viewer"
-vscode "dmytrobaida.gpt-commit"
-vscode "donjayamanne.git-extension-pack"
-vscode "donjayamanne.githistory"
-vscode "donjayamanne.python-environment-manager"
-vscode "dotjoshjohnson.xml"
-vscode "eamodio.gitlens"
-vscode "easycodeai.chatgpt-gpt4-gpt3-vscode"
-vscode "ecmel.vscode-html-css"
-vscode "esbenp.prettier-vscode"
-vscode "formulahendry.code-runner"
-vscode "foxundermoon.shell-format"
-vscode "frhtylcn.pythonsnippets"
-vscode "genieai.chatgpt-vscode"
-vscode "gera2ld.markmap-vscode"
-vscode "github.codespaces"
-vscode "github.copilot"
-vscode "github.copilot-chat"
-vscode "github.copilot-labs"
-vscode "github.vscode-github-actions"
-vscode "github.vscode-pull-request-github"
-vscode "goessner.mdmath"
-vscode "googlecloudtools.cloudcode"
-vscode "grapecity.gc-excelviewer"
-vscode "gruntfuggly.shifter"
-vscode "gruntfuggly.todo-tree"
-vscode "hnw.vscode-auto-open-markdown-preview"
-vscode "hoovercj.vscode-settings-cycler"
-vscode "huggingface.huggingface-vscode"
-vscode "ibm.output-colorizer"
-vscode "inu1255.easy-snippet"
-vscode "ionutvmi.path-autocomplete"
-vscode "jabacchetta.vscode-essentials"
-vscode "jakearl.search-editor-apply-changes"
-vscode "james-yu.latex-workshop"
-vscode "jasonlhy.hungry-delete"
-vscode "jinliming2.vscode-go-template"
-vscode "jkjustjoshing.vscode-text-pastry"
-vscode "johnpapa.vscode-peacock"
-vscode "kaleidoscope-app.vscode-ksdiff"
-vscode "kevinrose.vsc-python-indent"
-vscode "lacroixdavid1.vscode-format-context-menu"
-vscode "lightrun.lightrunplugin-saas"
-vscode "lostintangent.vsls-whiteboard"
-vscode "mathpix.vscode-mathpix-markdown"
-vscode "mattflower.aider"
-vscode "mechatroner.rainbow-csv"
-vscode "meezilla.json"
-vscode "merico.devchat"
-vscode "merico.lang-bridge-vsc"
-vscode "meshintelligenttechnologiesinc.pieces-vscode"
-vscode "metaseed.metago"
-vscode "metaseed.metajump"
-vscode "metaseed.metaword"
-vscode "mgesbert.python-path"
-vscode "mhutchie.git-graph"
-vscode "micnil.vscode-checkpoints"
-vscode "mikestead.dotenv"
-vscode "mikoz.black-py"
-vscode "monokai.theme-monokai-pro-vscode"
-vscode "morph.rift-vscode"
-vscode "morrislaptop.vscode-open-in-sourcetree"
-vscode "ms-azuretools.vscode-docker"
-vscode "ms-dotnettools.vscode-dotnet-runtime"
-vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
-vscode "ms-python.autopep8"
-vscode "ms-python.black-formatter"
-vscode "ms-python.debugpy"
-vscode "ms-python.flake8"
-vscode "ms-python.gather"
-vscode "ms-python.mypy-type-checker"
-vscode "ms-python.pylint"
-vscode "ms-python.python"
-vscode "ms-python.vscode-pylance"
-vscode "ms-toolsai.datawrangler"
-vscode "ms-toolsai.jupyter"
-vscode "ms-toolsai.jupyter-keymap"
-vscode "ms-toolsai.jupyter-renderers"
-vscode "ms-toolsai.vscode-jupyter-cell-tags"
-vscode "ms-toolsai.vscode-jupyter-slideshow"
-vscode "ms-vscode-remote.remote-containers"
-vscode "ms-vscode-remote.remote-ssh"
-vscode "ms-vscode.remote-explorer"
-vscode "ms-vscode.wordcount"
-vscode "ms-vsliveshare.vsliveshare"
-vscode "nhoizey.gremlins"
-vscode "njpwerner.autodocstring"
-vscode "njqdev.vscode-python-typehint"
-vscode "oderwat.indent-rainbow"
-vscode "percy.vscode-numpy-viewer"
-vscode "peterschmalfeldt.explorer-exclude"
-vscode "pkief.material-icon-theme"
-vscode "pnp.polacode"
-vscode "pwwang.gptcommit"
-vscode "rdebugger.r-debugger"
-vscode "reageyao.biosyntax"
-vscode "redhat.fabric8-analytics"
-vscode "redhat.vscode-yaml"
-vscode "reditorsupport.r"
-vscode "redjue.git-commit-plugin"
-vscode "ritwickdey.liveserver"
-vscode "sharat.vscode-brewfile"
-vscode "sonarsource.sonarlint-vscode"
-vscode "sourcegraph.cody-ai"
-vscode "sourcegraph.sourcegraph"
-vscode "sourcery.sourcery"
-vscode "stkb.rewrap"
-vscode "streetsidesoftware.code-spell-checker"
-vscode "svipas.control-snippets"
-vscode "tabnine.tabnine-vscode"
-vscode "taldennis-unfoldai-chatgpt-copilot.unfoldai"
-vscode "tamasfe.even-better-toml"
-vscode "thedavej.night-owl-black"
-vscode "tomoki1207.pdf"
-vscode "trunk.io"
-vscode "tushortz.python-extended-snippets"
-vscode "ultram4rine.vscode-choosealicense"
-vscode "visualstudioexptteam.intellicode-api-usage-examples"
-vscode "visualstudioexptteam.vscodeintellicode"
-vscode "vscode-snippet.snippet"
-vscode "vsls-contrib.gistfs"
-vscode "vstirbu.vscode-mermaid-preview"
-vscode "waderyan.gitblame"
-vscode "xyz.local-history"
-vscode "yzane.markdown-pdf"
-vscode "yzhang.markdown-all-in-one"
-vscode "ziyasal.vscode-open-in-github"
+# vscode "aaron-bond.better-comments"
+# vscode "alefragnani.bookmarks"
+# vscode "alefragnani.project-manager"
+# vscode "amazonwebservices.aws-toolkit-vscode"
+# vscode "atishay-jain.all-autocomplete"
+# vscode "aykutsarac.jsoncrack-vscode"
+# vscode "bierner.markdown-mermaid"
+# vscode "bierner.markdown-preview-github-styles"
+# # vscode "bito.bito"
+# # vscode "blackboxapp.blackbox"
+# vscode "bpruitt-goddard.mermaid-markdown-syntax-highlighting"
+# # vscode "cacher.cacher-vscode"
+# vscode "charliermarsh.ruff"
+# vscode "christian-kohler.path-intellisense"
+# vscode "codeium.codeium"
+# vscode "codestream.codestream"
+# vscode "codezombiech.gitignore"
+# vscode "codium.codium"
+# vscode "continue.continue"
+# vscode "ctf0.macros"
+# vscode "cxfksword.goto-documentation"
+# vscode "danielsanmedium.dscodegpt"
+# vscode "davidanson.vscode-markdownlint"
+# vscode "deerawan.vscode-dash"
+# vscode "dheovani.svg-viewer"
+# vscode "dmytrobaida.gpt-commit"
+# vscode "donjayamanne.git-extension-pack"
+# vscode "donjayamanne.githistory"
+# vscode "donjayamanne.python-environment-manager"
+# vscode "dotjoshjohnson.xml"
+# vscode "eamodio.gitlens"
+# # vscode "easycodeai.chatgpt-gpt4-gpt3-vscode"
+# vscode "ecmel.vscode-html-css"
+# vscode "esbenp.prettier-vscode"
+# vscode "formulahendry.code-runner"
+# vscode "foxundermoon.shell-format"
+# vscode "frhtylcn.pythonsnippets"
+# vscode "genieai.chatgpt-vscode"
+# vscode "gera2ld.markmap-vscode"
+# vscode "github.codespaces"
+# vscode "github.copilot"
+# vscode "github.copilot-chat"
+# vscode "github.copilot-labs"
+# vscode "github.vscode-github-actions"
+# vscode "github.vscode-pull-request-github"
+# vscode "goessner.mdmath"
+# vscode "googlecloudtools.cloudcode"
+# vscode "grapecity.gc-excelviewer"
+# vscode "gruntfuggly.shifter"
+# vscode "gruntfuggly.todo-tree"
+# vscode "hnw.vscode-auto-open-markdown-preview"
+# vscode "hoovercj.vscode-settings-cycler"
+# vscode "huggingface.huggingface-vscode"
+# vscode "ibm.output-colorizer"
+# vscode "inu1255.easy-snippet"
+# vscode "ionutvmi.path-autocomplete"
+# vscode "jabacchetta.vscode-essentials"
+# vscode "jakearl.search-editor-apply-changes"
+# vscode "james-yu.latex-workshop"
+# vscode "jasonlhy.hungry-delete"
+# vscode "jinliming2.vscode-go-template"
+# vscode "jkjustjoshing.vscode-text-pastry"
+# vscode "johnpapa.vscode-peacock"
+# vscode "kaleidoscope-app.vscode-ksdiff"
+# vscode "kevinrose.vsc-python-indent"
+# vscode "lacroixdavid1.vscode-format-context-menu"
+# vscode "lightrun.lightrunplugin-saas"
+# vscode "lostintangent.vsls-whiteboard"
+# vscode "mathpix.vscode-mathpix-markdown"
+# vscode "mattflower.aider"
+# vscode "mechatroner.rainbow-csv"
+# vscode "meezilla.json"
+# vscode "merico.devchat"
+# vscode "merico.lang-bridge-vsc"
+# vscode "meshintelligenttechnologiesinc.pieces-vscode"
+# vscode "metaseed.metago"
+# vscode "metaseed.metajump"
+# vscode "metaseed.metaword"
+# vscode "mgesbert.python-path"
+# vscode "mhutchie.git-graph"
+# vscode "micnil.vscode-checkpoints"
+# vscode "mikestead.dotenv"
+# vscode "mikoz.black-py"
+# vscode "monokai.theme-monokai-pro-vscode"
+# vscode "morph.rift-vscode"
+# vscode "morrislaptop.vscode-open-in-sourcetree"
+# vscode "ms-azuretools.vscode-docker"
+# vscode "ms-dotnettools.vscode-dotnet-runtime"
+# vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+# vscode "ms-python.autopep8"
+# vscode "ms-python.black-formatter"
+# vscode "ms-python.debugpy"
+# vscode "ms-python.flake8"
+# vscode "ms-python.gather"
+# vscode "ms-python.mypy-type-checker"
+# vscode "ms-python.pylint"
+# vscode "ms-python.python"
+# vscode "ms-python.vscode-pylance"
+# vscode "ms-toolsai.datawrangler"
+# vscode "ms-toolsai.jupyter"
+# vscode "ms-toolsai.jupyter-keymap"
+# vscode "ms-toolsai.jupyter-renderers"
+# vscode "ms-toolsai.vscode-jupyter-cell-tags"
+# vscode "ms-toolsai.vscode-jupyter-slideshow"
+# vscode "ms-vscode-remote.remote-containers"
+# vscode "ms-vscode-remote.remote-ssh"
+# vscode "ms-vscode.remote-explorer"
+# vscode "ms-vscode.wordcount"
+# vscode "ms-vsliveshare.vsliveshare"
+# vscode "nhoizey.gremlins"
+# vscode "njpwerner.autodocstring"
+# vscode "njqdev.vscode-python-typehint"
+# vscode "oderwat.indent-rainbow"
+# vscode "percy.vscode-numpy-viewer"
+# vscode "peterschmalfeldt.explorer-exclude"
+# vscode "pkief.material-icon-theme"
+# vscode "pnp.polacode"
+# vscode "pwwang.gptcommit"
+# # vscode "rdebugger.r-debugger"
+# vscode "reageyao.biosyntax"
+# vscode "redhat.fabric8-analytics"
+# vscode "redhat.vscode-yaml"
+# # vscode "reditorsupport.r"
+# vscode "redjue.git-commit-plugin"
+# vscode "ritwickdey.liveserver"
+# vscode "sharat.vscode-brewfile"
+# vscode "sonarsource.sonarlint-vscode"
+# vscode "sourcegraph.cody-ai"
+# vscode "sourcegraph.sourcegraph"
+# vscode "sourcery.sourcery"
+# vscode "stkb.rewrap"
+# vscode "streetsidesoftware.code-spell-checker"
+# vscode "svipas.control-snippets"
+# # vscode "tabnine.tabnine-vscode"
+# # vscode "taldennis-unfoldai-chatgpt-copilot.unfoldai"
+# vscode "tamasfe.even-better-toml"
+# vscode "thedavej.night-owl-black"
+# vscode "tomoki1207.pdf"
+# vscode "trunk.io"
+# vscode "tushortz.python-extended-snippets"
+# vscode "ultram4rine.vscode-choosealicense"
+# vscode "visualstudioexptteam.intellicode-api-usage-examples"
+# vscode "visualstudioexptteam.vscodeintellicode"
+# vscode "vscode-snippet.snippet"
+# vscode "vsls-contrib.gistfs"
+# vscode "vstirbu.vscode-mermaid-preview"
+# vscode "waderyan.gitblame"
+# vscode "xyz.local-history"
+# vscode "yzane.markdown-pdf"
+# vscode "yzhang.markdown-all-in-one"
+# vscode "ziyasal.vscode-open-in-github"

@@ -2,6 +2,8 @@
 
 set -eufo pipefail
 
+trap 'Interrupted by user"; exit' SIGINT
+
 {{ template "scripts-library" }}
 
 log_task "Installing go packages"

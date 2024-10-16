@@ -2,6 +2,8 @@
 
 set -eufo pipefail
 
+trap 'Interrupted by user"; exit' SIGINT
+
 {{ template "scripts-library" }}
 
 log_task "Installing pipx packages"
@@ -13,7 +15,8 @@ while read -r package; do
   fi
 
   # install the package
-  if ! pipx upgrade "$package" > /dev/null 2>&1; then
+  log_blue "Installing $package..."
+  if ! pipx upgrade "$package"; then
     log_error "Failed to install pipx package: $package"
     [[ -n $FAIL_FAST ]] && exit 1
   fi
