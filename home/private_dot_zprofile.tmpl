@@ -12,5 +12,4 @@ eval $({{ $homebrew }} shellenv)
 # Added by OrbStack: command-line tools and integration
 source ~/.orbstack/shell/init.zsh 2>/dev/null || :
 
-# ---- OpenAI ----
-export OPENAI_API_KEY=$(op read "op://Personal/OpenAI API Key/api key")
+if [ -f ~/.zprofile ]; then source ~/.zprofile; fi
