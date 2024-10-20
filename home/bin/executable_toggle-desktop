@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+currentValue=$(defaults read com.apple.finder CreateDesktop 2>/dev/null || echo "false")
+
+if [ "$currentValue" = "true" ]; then
+    defaults write com.apple.finder CreateDesktop false
+    killall Finder
+    terminal-notifier -title "Setting Changed" -message "Desktop items shown" -sound funk -sender "com.apple.systempreferences"
+else
+    defaults write com.apple.finder CreateDesktop true
+    killall Finder
+    terminal-notifier -title "Setting Changed" -message "Desktop items hidden" -sound funk -sender "com.apple.systempreferences"
+fi
