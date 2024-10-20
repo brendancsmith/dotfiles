@@ -56,32 +56,35 @@ fi
 eval "$(direnv hook zsh)"
 
 # ---- zplug ----
-export ZPLUG_HOME=/opt/homebrew/opt/zplug
-source $ZPLUG_HOME/init.zsh
 
-# Specify zplug plugins
-zplug "plugins/brew", from:oh-my-zsh
-# zplug "plugins/docker",   from:oh-my-zsh
-# zplug "plugins/docker-compose",   from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-# zplug "plugins/github",   from:oh-my-zsh
-zplug "plugins/osx", from:oh-my-zsh
+if [ "$TERM_PROGRAM" != "WarpTerminal" ]; then
+    export ZPLUG_HOME=/opt/homebrew/opt/zplug
+    source $ZPLUG_HOME/init.zsh
 
-# Install https://github.com/abertsch/Menlo-for-Powerline
-# iTerm2 > Profiles > Text > Use built-in Powerline glyphs
-zplug "themes/agnoster", from:oh-my-zsh
+    # Specify zplug plugins
+    zplug "plugins/brew", from:oh-my-zsh
+    # zplug "plugins/docker",   from:oh-my-zsh
+    # zplug "plugins/docker-compose",   from:oh-my-zsh
+    zplug "plugins/git", from:oh-my-zsh
+    # zplug "plugins/github",   from:oh-my-zsh
+    zplug "plugins/osx", from:oh-my-zsh
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo
-        zplug install
+    # Install https://github.com/abertsch/Menlo-for-Powerline
+    # iTerm2 > Profiles > Text > Use built-in Powerline glyphs
+    zplug "themes/agnoster", from:oh-my-zsh
+
+    # Install plugins if there are plugins that have not been installed
+    if ! zplug check --verbose; then
+        printf "Install? [y/N]: "
+        if read -q; then
+            echo
+            zplug install
+        fi
     fi
-fi
 
-# Source zplug plugins and add commands to $PATH
-zplug load
+    # Source zplug plugins and add commands to $PATH
+    zplug load
+fi
 
 # ---- virtualenvwrapper ----
 if [ -n "$(which virtualenvwrapper.sh)" ]; then
